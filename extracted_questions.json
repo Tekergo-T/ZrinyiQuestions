@@ -1,0 +1,614 @@
+[
+  {
+    "number": 1,
+    "question": "forduló OSZTÁLY 2. Összeállították: CSORDÁS MIHÁLY általános iskolai tanár CSORDÁSNÉ SZÉCSI JOLÁN középiskolai tanár Lektorálták: CSORDÁS PÉTER középiskolai tanár NAGY TIBOR általános iskolai tanár",
+    "class": 2,
+    "parsed_options": {}
+  },
+  {
+    "number": 1,
+    "question": "Melyik művelet eredménye a legnagyobb?",
+    "class": 2,
+    "parsed_options": {
+      "A": "19 – 2",
+      "B": "3 +13",
+      "C": "3 + 4 + 5",
+      "D": "9 + 9",
+      "E": "19 – 4"
+    }
+  },
+  {
+    "number": 2,
+    "question": "Erzsi a kertben 3 szál tulipánt, 5 szál rózsát és 6 szál gerberát szedett. Hány virágot szedett Erzsi a kertben?",
+    "class": 2,
+    "parsed_options": {
+      "A": "8",
+      "B": "9",
+      "C": "11",
+      "D": "14",
+      "E": "15"
+    }
+  },
+  {
+    "number": 3,
+    "question": "Hány 2-es szám látható az ábrán?                                    8 7 3 2",
+    "class": 2,
+    "parsed_options": {
+      "A": "1",
+      "B": "2",
+      "C": "3                                        2        2 4             3",
+      "D": "4",
+      "E": "5                                                  2       5"
+    }
+  },
+  {
+    "number": 4,
+    "question": "Kati 8 éves, testvére Laci 3 évvel fiatalabb. Hány éves Laci?",
+    "class": 2,
+    "parsed_options": {
+      "A": "3",
+      "B": "4",
+      "C": "5",
+      "D": "8",
+      "E": "11"
+    }
+  },
+  {
+    "number": 5,
+    "question": "Gondoltam egy számra. Elvettem belőle 27-et, és így 10-et kaptam. Me- lyik számra gondoltam?",
+    "class": 2,
+    "parsed_options": {
+      "A": "17",
+      "B": "20",
+      "C": "27",
+      "D": "37",
+      "E": "54"
+    }
+  },
+  {
+    "number": 6,
+    "question": "Mennyi a keretben látható állatok lábai számá- nak összege?",
+    "class": 2,
+    "parsed_options": {
+      "A": "5",
+      "B": "10",
+      "C": "14",
+      "D": "16",
+      "E": "20"
+    }
+  },
+  {
+    "number": 7,
+    "question": "„Hétfőn hatalmas hegyre megyek”– mondta Peti. Mennyi a Peti által mondott mondat szavaiban szereplő számok összege?",
+    "class": 2,
+    "parsed_options": {
+      "A": "8",
+      "B": "9",
+      "C": "13",
+      "D": "14",
+      "E": "15"
+    }
+  },
+  {
+    "number": 8,
+    "question": "Melyikkel egyenlő az 5 + 5 – 5 + 5 + 5 + 5 – 5 + 5 összeg?",
+    "class": 2,
+    "parsed_options": {
+      "A": "15",
+      "B": "20",
+      "C": "25",
+      "D": "30",
+      "E": "40"
+    }
+  },
+  {
+    "number": 9,
+    "question": "Sári egy hetet és két napot töltött a nagyszüleinél. Hány napot töltött Sári a nagyszüleinél?",
+    "class": 2,
+    "parsed_options": {
+      "A": "3",
+      "B": "9",
+      "C": "10",
+      "D": "12",
+      "E": "14"
+    }
+  },
+  {
+    "number": 10,
+    "question": "A hétfejű sárkányoknak hét fejük és egy farkuk van. Hány farka van három hétfejű sárkánynak?",
+    "class": 2,
+    "parsed_options": {
+      "A": "3",
+      "B": "7",
+      "C": "10",
+      "D": "14",
+      "E": "21"
+    }
+  },
+  {
+    "number": 11,
+    "question": "TÓBIÁS tréfából úgy írta le a nevét, hogy minden második betűjét ki- hagyta. Mit írt le?",
+    "class": 2,
+    "parsed_options": {
+      "A": "TBS",
+      "B": "TÓI",
+      "C": "BIÁ",
+      "D": "ÓBI",
+      "E": "TBÁ"
+    }
+  },
+  {
+    "number": 12,
+    "question": "Melyik szám kerül a ♥ helyére, ha a ♥+13 = 50 egyenlőség igaz?",
+    "class": 2,
+    "parsed_options": {
+      "A": "33",
+      "B": "36",
+      "C": "37",
+      "D": "43",
+      "E": "47"
+    }
+  },
+  {
+    "number": 13,
+    "question": "Panninak 10 fiú és 10 leány osztálytársa van. Hány tanuló jár ebbe az osztályba?",
+    "class": 2,
+    "parsed_options": {
+      "A": "10",
+      "B": "11",
+      "C": "19",
+      "D": "20",
+      "E": "21"
+    }
+  },
+  {
+    "number": 14,
+    "question": "Miki, a varázslóinas, egereket varázsolt. Az „Egyedem-begyedem, le- gyen egy egerem!” varázsige kimondása után annyi egér jelent meg, mint ahányszor Miki a varázsigében kiejtette az „e” hangot. Hány ege- ret varázsolt elő Miki, ha csak egyszer mondta ki a varázsigét?",
+    "class": 2,
+    "parsed_options": {
+      "A": "9",
+      "B": "10",
+      "C": "11",
+      "D": "12",
+      "E": "13"
+    }
+  },
+  {
+    "number": 15,
+    "question": "Samu a 47; 17; 74; 40 és 71 számokat csökkenő sorrendben kimondta. Melyik számot mondta ki először?",
+    "class": 2,
+    "parsed_options": {
+      "A": "17",
+      "B": "40",
+      "C": "47",
+      "D": "71",
+      "E": "74"
+    }
+  },
+  {
+    "number": 16,
+    "question": "Egy 4×4-es négyzetrács négyzeteibe jeleket rajzoltunk (lásd ábra). Melyik 2×2-es négyzetet vághatjuk ki az ábrá- ból?",
+    "class": 2,
+    "parsed_options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    }
+  },
+  {
+    "number": 17,
+    "question": "Egy vonat hat kocsiból áll. Minden kocsin három ajtó van: egy a kocsi elején, egy a közepén és egy a végén. Hol helyezkedik el − az első kocsi elejétől számolva − a 14. ajtó?",
+    "class": 2,
+    "parsed_options": {
+      "A": "A negyedik kocsi végén.",
+      "B": "Az ötödik kocsi elején.",
+      "C": "Az ötödik kocsi közepén.",
+      "D": "Az ötödik kocsi végén.",
+      "E": "A hatodik kocsi elején."
+    }
+  },
+  {
+    "number": 18,
+    "question": "Az alábbi ábrák egyikén Pepi bohóc látható. Ruháján három gomb van, bal kezében virágot, jobb kezében vödröt tart. Melyik ábra mutatja Pepi bohócot?",
+    "class": 2,
+    "parsed_options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    }
+  },
+  {
+    "number": 19,
+    "question": "Fanni gyümölcssalátát készít. A recept szerint 4 személyre 1 alma, 2 ba- nán és 6 narancs kell. Hány almát vásároljon Fanni a gyümölcssalátá- hoz, ha 12 embernek készíti?",
+    "class": 2,
+    "parsed_options": {
+      "A": "3",
+      "B": "4",
+      "C": "8",
+      "D": "12",
+      "E": "24"
+    }
+  },
+  {
+    "number": 20,
+    "question": "Az Abacus újság a kedvenc rovatomnál van nyitva. A két látható oldal- szám összege 29. Melyik a két oldalszám közül a kisebb?",
+    "class": 2,
+    "parsed_options": {
+      "A": "12",
+      "B": "13",
+      "C": "14",
+      "D": "15",
+      "E": "16"
+    }
+  },
+  {
+    "number": 21,
+    "question": "Az ábrán három szám olyan titkos- írással leírt alakja látható, amely- 20 =         19 =         35 = ben mindegyik számjegyet egy ál- lat képe helyettesít. Melyik válasz jelöli a 30-at?",
+    "class": 2,
+    "parsed_options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    }
+  },
+  {
+    "number": 22,
+    "question": "A nyáron volt egy olyan hét, amikor minden nap esett az eső. Azon a héten hétfőn 4 milliméter hullott, és minden utána következő napon 2 milliméterrel több, mint az előző napon. Hány milliméter eső esett azon a héten?",
+    "class": 2,
+    "parsed_options": {
+      "A": "16",
+      "B": "40",
+      "C": "60",
+      "D": "70",
+      "E": "80"
+    }
+  },
+  {
+    "number": 23,
+    "question": "Egy tűzoltó a létra középső fokán áll, és oltja a tüzet. Amikor a tűz erősödik, kénytelen 8 fokkal lejjebb jönni a hőség miatt. Pár perc múlva a tűz csendesedik, s így 14 fokkal feljebb mászva folytatja a lángokkal való küzdelmet. Innen a tűz eloltása után 18 fokot lefelé haladva jut el a létra legalsó fokára. Hány fok van a létrán?",
+    "class": 2,
+    "parsed_options": {
+      "A": "18",
+      "B": "24",
+      "C": "25",
+      "D": "26",
+      "E": "27"
+    }
+  },
+  {
+    "number": 24,
+    "question": "Törpapa szeretne eljutni a patakon és a        Hókuszpók hegyen túl lakó Hókuszpókhoz. A pa- takon négy híd van, a hegyen három alagút vezet keresztül. A patak és a hegy között egy kerítés húzódik − a rajz          Törpapa szerint −, amelyen Törpapa nem tud átmászni. Hányféle utat választhat Törpapa Hókuszpókhoz, ha a patakon csak egyszer mehet át?",
+    "class": 2,
+    "parsed_options": {
+      "A": "3",
+      "B": "4",
+      "C": "5",
+      "D": "6",
+      "E": "12"
+    }
+  },
+  {
+    "number": 25,
+    "question": "Tündérországban csak 2 magánhangzót és 2 mássalhangzót használ- nak. A szavakban legalább 1 mássalhangzó és legalább 1 magánhangzó van. Hány különböző hárombetűs szó létezik Tündérországban, ha 1 szóban azonos betűk nincsenek?",
+    "class": 2,
+    "parsed_options": {
+      "A": "4",
+      "B": "12",
+      "C": "16",
+      "D": "24",
+      "E": "36"
+    }
+  },
+  {
+    "number": 1,
+    "question": "forduló OSZTÁLY . Összeállították: CSORDÁS MIHÁLY általános iskolai tanár CSORDÁSNÉ SZÉCSI JOLÁN középiskolai tanár Lektorálták: CSORDÁS PÉTER középiskolai tanár NAGY TIBOR általános iskolai tanár",
+    "class": 2,
+    "parsed_options": {}
+  },
+  {
+    "number": 1,
+    "question": "Melyik szám a legnagyobb?",
+    "class": 2,
+    "parsed_options": {
+      "A": "20",
+      "B": "19",
+      "C": "9",
+      "D": "18",
+      "E": "12"
+    }
+  },
+  {
+    "number": 2,
+    "question": "A mezőn az őzek megijedtek, és két irányba szétszaladtak (lásd ábra). Hány őz szaladt abba az irányba, amerre a nyíl mutat?",
+    "class": 2,
+    "parsed_options": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4",
+      "E": "5"
+    }
+  },
+  {
+    "number": 3,
+    "question": "Melyik művelet eredménye nem egyenlő 7-tel?",
+    "class": 2,
+    "parsed_options": {
+      "A": "1 + 6",
+      "B": "5 + 2",
+      "C": "3+ 5",
+      "D": "3 + 4",
+      "E": "9 – 2"
+    }
+  },
+  {
+    "number": 4,
+    "question": "Hány fehér pötty látható a két gombán összesen?",
+    "class": 2,
+    "parsed_options": {
+      "A": "4",
+      "B": "5",
+      "C": "8",
+      "D": "9",
+      "E": "10"
+    }
+  },
+  {
+    "number": 5,
+    "question": "Gondoltam egy számra. Hozzáadtam 5-öt, és így 13-at kaptam. Melyik számra gondoltam?",
+    "class": 2,
+    "parsed_options": {
+      "A": "5",
+      "B": "6",
+      "C": "8",
+      "D": "9",
+      "E": "18"
+    }
+  },
+  {
+    "number": 6,
+    "question": "Melyik állatnak van a legtöbb lába?",
+    "class": 2,
+    "parsed_options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    }
+  },
+  {
+    "number": 7,
+    "question": "Melyik mondatban nincs elrejtve szám?",
+    "class": 2,
+    "parsed_options": {
+      "A": "Magyarország legmagasabb hegye a Kékes-tető.",
+      "B": "A királyfi legyőzte a hétfejű sárkányt.",
+      "C": "Kecskemét szép város.",
+      "D": "Kati pulóvert köt.",
+      "E": "Ez az alma hatalmas."
+    }
+  },
+  {
+    "number": 8,
+    "question": "Galagonyafalván a 2.a osztályból 13 fiú jár atlétika edzésre. Az osztályból 7-tel kevesebb lány jár atlétika edzésre, mint fiú. Hány lány jár a 2.a osz- tályból atlétika edzésre Galagonyafalván?",
+    "class": 2,
+    "parsed_options": {
+      "A": "6",
+      "B": "7",
+      "C": "8",
+      "D": "13",
+      "E": "20"
+    }
+  },
+  {
+    "number": 9,
+    "question": "Anna a múlt héten hétfő és vasárnap kivételével minden nap korcsolyázott. Hány nap volt korcsolyázni Anna a múlt héten?",
+    "class": 2,
+    "parsed_options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5",
+      "E": "7"
+    }
+  },
+  {
+    "number": 10,
+    "question": "Mosó Masa kiteregette kimo- sott zoknijait (lásd ábra). Me- lyik zoknijának hiányzik a párja?",
+    "class": 2,
+    "parsed_options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    }
+  },
+  {
+    "number": 11,
+    "question": "Betti díszítésként az ábrán látható sormintát rajzolta matematika házi fel- adatának végére. Melyik jel szerepel a sormintában a legkevesebbszer?              ",
+    "class": 2,
+    "parsed_options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    }
+  },
+  {
+    "number": 12,
+    "question": "Hány  látható az ábrán?                                    ",
+    "class": 2,
+    "parsed_options": {
+      "A": "16",
+      "B": "18",
+      "C": "20                           ",
+      "D": "25",
+      "E": "36                                          "
+    }
+  },
+  {
+    "number": 13,
+    "question": "Hány ágy van abban a faházban, ahol 4 kétágyas és 2 háromágyas szoba van?",
+    "class": 2,
+    "parsed_options": {
+      "A": "6",
+      "B": "8",
+      "C": "13",
+      "D": "14",
+      "E": "16"
+    }
+  },
+  {
+    "number": 14,
+    "question": "Három gyufaszálat tettünk le egymás után az asztalra (lásd ábra). Milyen sorrendben tettük le a gyufaszálakat?                      c a     b",
+    "class": 2,
+    "parsed_options": {
+      "A": "abc",
+      "B": "acb",
+      "C": "bca",
+      "D": "cab",
+      "E": "cba"
+    }
+  },
+  {
+    "number": 15,
+    "question": "Tibi tolltartójában öt ceruza volt, köztük több hegyes, mint tompa. Tibi ki- vett egy tompa ceruzát a tolltartójából, és még így is maradt benne tompa ceruza. Hány tompa ceruza maradt ekkor Tibi tolltartójában?",
+    "class": 2,
+    "parsed_options": {
+      "A": "0",
+      "B": "1",
+      "C": "2",
+      "D": "3",
+      "E": "4"
+    }
+  },
+  {
+    "number": 16,
+    "question": "Bolka lerajzolta Lolkát (lásd ábra). Melyik az a kép, amelyik nem lehetett Bolka rajza rajzolás közben, ha nem használt radírt?",
+    "class": 2,
+    "parsed_options": {
+      "A": "",
+      "B": "",
+      "C": "",
+      "D": "",
+      "E": ""
+    }
+  },
+  {
+    "number": 17,
+    "question": "Samu este 8 órakor aludt el, és másnap reggel 7 órakor ébredt fel. Zoli egy órával később tudott csak elaludni, mint Samu. Hány órát aludt Zoli, ha ugyanakkor ébredt fel, mint Samu?",
+    "class": 2,
+    "parsed_options": {
+      "A": "1",
+      "B": "9",
+      "C": "10",
+      "D": "12",
+      "E": "15"
+    }
+  },
+  {
+    "number": 18,
+    "question": "Nagymama 23 darab kakaós palacsintát készített, 8-cal kevesebbet, mint lekváros palacsintát. Hány lekváros palacsintát készített nagymama?",
+    "class": 2,
+    "parsed_options": {
+      "A": "14",
+      "B": "15",
+      "C": "16",
+      "D": "30",
+      "E": "31"
+    }
+  },
+  {
+    "number": 19,
+    "question": "Tomi és Karcsi összesen 18 gombócot evett meg. Karcsi kétszer annyit, mint Tomi. Hány gombócot evett meg Karcsi?",
+    "class": 2,
+    "parsed_options": {
+      "A": "6",
+      "B": "8",
+      "C": "9",
+      "D": "12",
+      "E": "15"
+    }
+  },
+  {
+    "number": 20,
+    "question": "Pistike a kishúgának azt mondta: négy nap múlva olyan nap lesz, ami csü- törtök után két nappal van. Melyik napon mondta ezt Pistike?",
+    "class": 2,
+    "parsed_options": {
+      "A": "hétfő",
+      "B": "kedd",
+      "C": "szerda",
+      "D": "csütörtök",
+      "E": "szombat"
+    }
+  },
+  {
+    "number": 21,
+    "question": "Egy villamosra az utolsó előtti megállóban felszállt 8 utas, és leszállt róla 5 utas. Az utolsó megállóban leszállt a villamoson lévő mind a 10 utas. Hány utas volt a villamoson, amikor beérkezett az utolsó előtti megállóba?",
+    "class": 2,
+    "parsed_options": {
+      "A": "3",
+      "B": "7",
+      "C": "13",
+      "D": "18",
+      "E": "23"
+    }
+  },
+  {
+    "number": 22,
+    "question": "Kati palacsintát sütött. Csak a tizedik és az utolsó nem sikerült szépre, mert ezek egy kicsit elszakadtak. A két szakadt palacsinta megsütése között nyolc szépet sütött. Hány palacsintát sütött Kati?",
+    "class": 2,
+    "parsed_options": {
+      "A": "9",
+      "B": "10",
+      "C": "17",
+      "D": "18",
+      "E": "19"
+    }
+  },
+  {
+    "number": 23,
+    "question": "Tomi a nyári bográcsos főzéshez gyújtóst készített úgy, hogy száraz szőlő- vesszőket tört össze, egy perc alatt négyet. Tíz perc munka után két perc pihenőt tartott, majd tovább folytatta a vesszők tördelését. A munkát reggel 8 órakor kezdte és 8 óra 15 perckor hagyta abba. Hány szőlővesszőt tört össze gyújtósnak?",
+    "class": 2,
+    "parsed_options": {
+      "A": "15",
+      "B": "23",
+      "C": "40",
+      "D": "52",
+      "E": "60"
+    }
+  },
+  {
+    "number": 24,
+    "question": "Tudorka számítógépe rosszul működik. Minden betű begépelésekor közvet- lenül a begépelt betű képe után a képernyőn megjelenik egy A betű. Mi látható a számítógép képernyőjén, ha Tudorka a LAP szót gépelte be?",
+    "class": 2,
+    "parsed_options": {
+      "A": "ALAPA",
+      "B": "LAAPA",
+      "C": "LAAAPA",
+      "D": "LAAP",
+      "E": "ALAAAPA"
+    }
+  },
+  {
+    "number": 25,
+    "question": "Az autóbuszban 3 sorban egymás mögött, soronként 2 üléssel, összesen 6 szabad hely van. Anna, Bea, Csilla, Dóri, Eszter és Fanni leültek ezekre a helyekre. Anna nem Bea mellett, Bea nem Csilla és nem Dóri mellett, Dóri nem Anna, nem Csilla és nem Eszter mellett ült. Ki mellett ült Anna?",
+    "class": 2,
+    "parsed_options": {
+      "A": "Bea",
+      "B": "Csilla",
+      "C": "Dóri",
+      "D": "Eszter",
+      "E": "Ezekből az adatokból nem lehet meghatározni."
+    }
+  }
+]

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zrínyi Ilona Matematika Verseny</title>
+    <meta name="description" content="Zrínyi Ilona Matematika Verseny stílusú feladatsorok gyakorlásához">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <!-- Header -->
+        <header class="header">
+            <div class="header-main">
+                <div class="logo">
+                    <span class="logo-icon">📐</span>
+                    <div class="title-container">
+                        <h1>Zrínyi Ilona Matematika Verseny</h1>
+                        <p class="subtitle">Gyakorló feladatsor generátor</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <div id="user-info" class="user-info hidden">
+                    <span id="user-name-display"></span>
+                    <span id="reward-status" class="reward-status">🎮 Roblox</span>
+                </div>
+                <button id="show-history-header" class="btn-header">📜 Előzmények</button>
+                <button id="show-help-btn" class="btn-header" title="Segítség">❓</button>
+                <button id="refresh-db-btn" class="btn-header" title="Adatbázis frissítése">🔄</button>
+            </div>
+        </header>
+
+        <!-- Login Screen -->
+        <section id="login-screen" class="screen active">
+            <div class="card glass-card login-card">
+                <h2>Szia! Ki vagy?</h2>
+                <p style="color:var(--text-secondary); margin-bottom: 20px;">Írd be a neved vagy válassz a listából</p>
+
+                <!-- Existing Users Selector -->
+                <div id="existing-users-container" class="existing-users-container hidden">
+                    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:10px;">Korábbi felhasználók:</p>
+                    <div id="existing-users-list" class="existing-users-list"></div>
+                    <hr style="border:none; border-top:1px solid rgba(255,255,255,0.1); margin:20px 0;">
+                    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:10px;">Vagy új felhasználó:</p>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="username-input" placeholder="Írd be a neved" autocomplete="off">
+                </div>
+                <button id="login-btn" class="btn-primary">Indulás!</button>
+            </div>
+        </section>
+
+        <!-- Class Selection Screen -->
+        <section id="class-selection" class="screen">
+            <div class="card glass-card">
+                <h2>Válaszd ki az osztályodat!</h2>
+                <p class="hint">Válassz 2-8. osztály közül</p>
+                <div class="class-buttons">
+                    <button class="class-btn" data-class="2">2. osztály</button>
+                    <button class="class-btn" data-class="3">3. osztály</button>
+                    <button class="class-btn" data-class="4">4. osztály</button>
+                    <button class="class-btn" data-class="5">5. osztály</button>
+                    <button class="class-btn" data-class="6">6. osztály</button>
+                    <button class="class-btn" data-class="7">7. osztály</button>
+                    <button class="class-btn" data-class="8">8. osztály</button>
+                </div>
+
+                <!-- Quiz History Section -->
+                <div id="quiz-history-container" class="history-container hidden">
+                    <h3>📜 Korábbi eredmények</h3>
+                    <div id="quiz-history-list" class="history-list"></div>
+                    <!-- History list will be populated here -->
+                    <button id="clear-history" class="btn-text">Előzmények törlése</button>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card glass-card dashboard-item" id="stats-card">
+                    <h3>🏆 Statisztikák</h3>
+                    <p>Nézd meg, mennyit fejlődtél!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Screen -->
+        <section id="stats-screen" class="screen">
+            <div class="card glass-card">
+                <div class="screen-header">
+                    <button class="btn-back" onclick="showScreen('class-selection')">← Vissza</button>
+                    <h2>📈 Statisztikák</h2>
+                </div>
+
+                <div class="stats-overview">
+                    <div class="stat-box">
+                        <span class="stat-label">Összes kitöltés</span>
+                        <span class="stat-number" id="total-quizzes">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Átlagpontszám</span>
+                        <span class="stat-number" id="avg-score">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Legjobb eredmény</span>
+                        <span class="stat-number" id="best-score">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Összes pont</span>
+                        <span class="stat-number" id="total-points">0</span>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Fejlődési grafikon (utolsó 10 kvíz)</h3>
+                    <div id="score-chart" class="simple-chart">
+                        <!-- Bars will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed History Review Screen -->
+        <section id="history-review-screen" class="screen">
+            <div class="card glass-card">
+                <div class="screen-header">
+                    <button class="btn-back" onclick="showScreen('class-selection')">← Vissza</button>
+                    <h2>Kvíz részletei</h2>
+                </div>
+                <div id="review-header-info" class="review-info"></div>
+                <div class="answer-review">
+                    <div id="review-questions-list" class="answer-review-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Screen -->
+        <section id="quiz-screen" class="screen">
+            <!-- Quiz Header with Timer -->
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <span id="selected-class" class="badge"></span>
+                    <span id="timer-display" class="badge timer">⏱️ 60:00</span>
+                </div>
+                <button id="finish-quiz" class="btn-primary">Befejezés</button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill" style="width: 4%"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="progress-current">1</span> / <span id="progress-total">25</span>
+                </div>
+            </div>
+
+            <!-- Question Indicators (mini navigation) -->
+            <div id="question-indicators" class="question-indicators">
+                <!-- Will be generated dynamically -->
+            </div>
+
+            <!-- Single Question Display -->
+            <div id="question-container" class="question-container">
+                <div class="question-card active-question">
+                    <div class="question-header">
+                        <span id="current-question-number" class="question-number">1</span>
+                        <span id="current-difficulty" class="difficulty-tag easy">Könnyű</span>
+                    </div>
+                    <p id="current-question-text" class="question-text"></p>
+                    <img id="current-question-image" class="question-image" style="display: none;">
+                    <div id="options-container" class="options-list">
+                        <!-- Options will be generated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="navigation-buttons">
+                <button id="prev-question" class="btn-nav" disabled>
+                    ← Előző
+                </button>
+                <button id="next-question" class="btn-nav">
+                    Következő →
+                </button>
+            </div>
+        </section>
+
+        <!-- Results Screen -->
+        <section id="results-screen" class="screen">
+            <div class="card glass-card results-card">
+                <h2>📊 Eredmények</h2>
+
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span id="final-score" class="score-value">0</span>
+                        <span class="score-label">pont</span>
+                    </div>
+                </div>
+
+                <div id="time-used" class="time-used"></div>
+
+                <div class="stats-grid">
+                    <div class="stat-item correct">
+                        <span class="stat-icon">✓</span>
+                        <span id="correct-count" class="stat-value">0</span>
+                        <span class="stat-label">Helyes</span>
+                    </div>
+                    <div class="stat-item wrong">
+                        <span class="stat-icon">✗</span>
+                        <span id="wrong-count" class="stat-value">0</span>
+                        <span class="stat-label">Hibás</span>
+                    </div>
+                    <div class="stat-item empty">
+                        <span class="stat-icon">○</span>
+                        <span id="empty-count" class="stat-value">0</span>
+                        <span class="stat-label">Üres</span>
+                    </div>
+                </div>
+
+                <div class="difficulty-breakdown">
+                    <h3>Nehézség szerinti bontás</h3>
+                    <div class="difficulty-stats">
+                        <div class="difficulty-row">
+                            <span class="diff-label easy">Könnyű (1-10)</span>
+                            <div class="diff-bar-container">
+                                <div id="easy-bar" class="diff-bar easy" style="width: 0%"></div>
+                            </div>
+                            <span id="easy-score">0/10</span>
+                        </div>
+                        <div class="difficulty-row">
+                            <span class="diff-label medium">Közepes (11-20)</span>
+                            <div class="diff-bar-container">
+                                <div id="medium-bar" class="diff-bar medium" style="width: 0%"></div>
+                            </div>
+                            <span id="medium-score">0/10</span>
+                        </div>
+                        <div class="difficulty-row">
+                            <span class="diff-label hard">Nehéz (21-25)</span>
+                            <div class="diff-bar-container">
+                                <div id="hard-bar" class="diff-bar hard" style="width: 0%"></div>
+                            </div>
+                            <span id="hard-score">0/5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="performance-analysis" class="performance-analysis">
+                    <!-- Performance analysis will be inserted here -->
+                </div>
+
+                <!-- History on Results Page -->
+                <div id="results-history-container" class="history-container hidden">
+                    <h3>📜 Korábbi eredmények</h3>
+                    <div id="results-history-list" class="history-list">
+                        <!-- History items will be generated here -->
+                    </div>
+                </div>
+
+                <!-- Answer Review Section -->
+                <div class="answer-review">
+                    <h3>📋 Válaszok áttekintése</h3>
+                    <p class="hint">Kattints egy kérdésre a részletek megtekintéséhez</p>
+                    <div id="answer-review-list" class="answer-review-list">
+                        <!-- Will be generated dynamically -->
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button id="new-quiz" class="btn-primary">Új feladatsor</button>
+                    <button id="export-pdf" class="btn-secondary btn-export">📄 PDF exportálás</button>
+                    <button id="show-json" class="btn-secondary">JSON exportálás</button>
+                </div>
+            </div>
+
+            <!-- JSON Export Modal -->
+            <div id="json-modal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Adatbázis JSON</h3>
+                        <button id="close-modal" class="btn-close">×</button>
+                    </div>
+                    <pre id="json-output" class="json-output"></pre>
+                    <button id="copy-json" class="btn-primary">Másolás</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- History Modal (Global) -->
+        <div id="history-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📜 Korábbi eredmények</h2>
+                    <button id="close-history-modal" class="btn-close">×</button>
+                </div>
+                <div id="history-modal-list" class="history-list">
+                    <!-- History items will be generated here -->
+                </div>
+                <button id="clear-history-modal" class="btn-text">Előzmények törlése</button>
+            </div>
+        </div>
+        <!-- Help Modal -->
+        <div id="help-modal" class="modal hidden">
+            <div class="modal-content glass-card help-modal-content">
+                <div class="modal-header">
+                    <h2>❓ Segítség és Pontszámítás</h2>
+                    <button id="close-help-modal" class="btn-close">×</button>
+                </div>
+                <div class="help-content">
+                    <section>
+                        <h3>🏆 Pontszámítás</h3>
+                        <p>A feladatsor 25 kérdésből áll, a nehézségük szerint különböző pontszámot érnek:</p>
+                        <ul>
+                            <li><strong>1-10. feladat:</strong> 3 pont / helyes válasz</li>
+                            <li><strong>11-20. feladat:</strong> 4 pont / helyes válasz</li>
+                            <li><strong>21-25. feladat:</strong> 5 pont / helyes válasz</li>
+                        </ul>
+                        <p class="hint"><strong>Alappont:</strong> 30 pont. <strong>Hibás válasz:</strong> -1 pont. <strong>Üresen hagyott:</strong> 0 pont.</p>
+                        <p><strong>Hogyan jön ki a 125 pont?</strong></p>
+                        <ul>
+                            <li><strong>30 pont</strong> (Alappontszám mindenkinek)</li>
+                            <li><strong>+ 30 pont</strong> (10 db könnyű feladat × 3 pont)</li>
+                            <li><strong>+ 40 pont</strong> (10 db közepes feladat × 4 pont)</li>
+                            <li><strong>+ 25 pont</strong> (5 db nehéz feladat × 5 pont)</li>
+                        </ul>
+                        <p><strong>Maximum (minden helyes): 30 + 30 + 40 + 25 = 125 pont.</strong></p>
+                        <p class="hint">Mivel a hibás válasz -1 pont, a végső pontszám a hibák számától is függ.</p>
+                    </section>
+
+                    <section class="reward-section">
+                        <h3>🎮 Roblox Játékidő Jutalom</h3>
+                        <p>105 ponttól Roblox játékidőt nyerhetsz. A jutalom 105 és 125 pont között <strong>köbös</strong> (cubic) görbe szerint nő, és a végeredmény egész percre van kerekítve.</p>
+                        <div class="reward-table">
+                            <div class="reward-row header">
+                                <span>Pontszám</span>
+                                <span>Jutalom (perc)</span>
+                            </div>
+                            <div class="reward-row">
+                                <span>105 pont alatt</span>
+                                <span>0</span>
+                            </div>
+                            <div class="reward-row">
+                                <span>105 pont (példa)</span>
+                                <span>1</span>
+                            </div>
+                            <div class="reward-row">
+                                <span>115 pont (példa)</span>
+                                <span>5</span>
+                            </div>
+                            <div class="reward-row">
+                                <span>120 pont (példa)</span>
+                                <span>13</span>
+                            </div>
+                            <div class="reward-row">
+                                <span>125 pont</span>
+                                <span>30 (MAX)</span>
+                            </div>
+                        </div>
+                        <p class="daily-cap">⚠️ <strong>Napi limit:</strong> Összesen maximum 30 percet gyűjthetsz egy
+                            nap alatt.</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Embedded database (base64) for file:// protocol support -->
+    <!-- sql.js for client-side SQLite -->
+    <script src="https://sql.js.org/dist/sql-wasm.js"></script>
+    <script src="db_data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
