@@ -2580,7 +2580,7 @@ QUESTIONS = [
     {
         "class": "2",
         "difficulty": "hard",
-        "question": "Két szám összege 85. A nagyobb szám háromszorosa 5-tel nagyobb, mint a kisebb háromszorosa. Mennyi a nagyobb szám?",
+        "question": "Két szám összege 85. A nagyobb szám háromszorosa 75-tel nagyobb, mint a kisebb háromszorosa. Mennyi a nagyobb szám?",
         "options": ["40", "45", "50", "55", "60"],
         "correct": "D",
         "comment": "Adott a nagyobb válasz (55), ha x=55, akkor y=30. x-y=25. 3x-3y=75. Ez nem 5. Valószínűleg a kérdésben a 5-tel több helyett 75-tel több kellene.",
