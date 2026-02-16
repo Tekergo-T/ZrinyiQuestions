@@ -151,7 +151,12 @@ async function initDatabase() {
 function saveDatabase() {
     if (state.db) {
         const data = state.db.export();
-        const base64 = btoa(String.fromCharCode.apply(null, data));
+        let binary = '';
+        const len = data.byteLength;
+        for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode(data[i]);
+        }
+        const base64 = btoa(binary);
         localStorage.setItem('zrinyi_db', base64);
     }
 }
@@ -651,11 +656,19 @@ function updateTimerDisplay() {
 function generateQuiz() {
     state.currentQuiz = [];
 
-    const easyQuestions = selectQuestionsFromDb('easy', DIFFICULTY_DISTRIBUTION.easy.count);
-    const mediumQuestions = selectQuestionsFromDb('medium', DIFFICULTY_DISTRIBUTION.medium.count);
-    const hardQuestions = selectQuestionsFromDb('hard', DIFFICULTY_DISTRIBUTION.hard.count);
+    // User Requirement: At least 2 images, max 10.
+    // We will aim for 5 image questions total (2 Easy, 2 Medium, 1 Hard).
+    const easyQuestions = selectQuestionsMixed('easy', DIFFICULTY_DISTRIBUTION.easy.count, 2);
+    const mediumQuestions = selectQuestionsMixed('medium', DIFFICULTY_DISTRIBUTION.medium.count, 2);
+    const hardQuestions = selectQuestionsMixed('hard', DIFFICULTY_DISTRIBUTION.hard.count, 1);
 
     state.currentQuiz = [...easyQuestions, ...mediumQuestions, ...hardQuestions];
+
+    // Shuffle the global quiz order so images aren't always first or last in their difficulty block
+    // (Though they are correctly ordered by difficulty blocks usually? No, the original code kept them in difficulty blocks)
+    // The original code was: [...easy, ...medium, ...hard]. We should keep that difficulty progression.
+    // But WITHIN each difficulty, we want to shuffle so images aren't always at the top.
+
     ensureQuizLength();
     incrementShownCounts();
 
@@ -663,32 +676,33 @@ function generateQuiz() {
     renderCurrentQuestion();
 }
 
-function selectQuestionsFromDb(difficulty, count) {
-    let query = `
+function selectQuestionsMixed(difficulty, totalCount, imageCount) {
+    const textCount = totalCount - imageCount;
+
+    // 1. Get Image Questions
+    const imageQ = getQuestionsByType(difficulty, imageCount, true);
+
+    // 2. Get Text Questions
+    const textQ = getQuestionsByType(difficulty, textCount, false);
+
+    // 3. Combine and Shuffle
+    const combined = [...imageQ, ...textQ];
+    return shuffleArray(combined);
+}
+
+function getQuestionsByType(difficulty, count, isImage) {
+    const imageCondition = isImage ? "(image IS NOT NULL AND image != '')" : "(image IS NULL OR image = '')";
+    const query = `
         SELECT id, class, difficulty, question, image, 
                option_a, option_b, option_c, option_d, option_e, 
                correct_answer, shown_count
         FROM questions 
-        WHERE class = ? AND difficulty = ?
+        WHERE class = ? AND difficulty = ? AND ${imageCondition}
         ORDER BY shown_count ASC, RANDOM()
         LIMIT ?
     `;
 
-    let result = state.db.exec(query, [state.selectedClass, difficulty, count]);
-
-    if (!result.length || result[0].values.length < count) {
-        query = `
-            SELECT id, class, difficulty, question, image, 
-                   option_a, option_b, option_c, option_d, option_e, 
-                   correct_answer, shown_count
-            FROM questions 
-            WHERE difficulty = ?
-            ORDER BY shown_count ASC, RANDOM()
-            LIMIT ?
-        `;
-        result = state.db.exec(query, [difficulty, count]);
-    }
-
+    const result = state.db.exec(query, [state.selectedClass, difficulty, count]);
     if (!result.length) return [];
 
     return result[0].values.map(row => ({
@@ -707,6 +721,14 @@ function selectQuestionsFromDb(difficulty, count) {
         correct_answer: row[10],
         shown_count: row[11]
     }));
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
 
 function ensureQuizLength() {
