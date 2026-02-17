@@ -395,6 +395,10 @@ def draw_colored_grid(grid, cell=35):
             d.rectangle([x1, y1, x1+cell, y1+cell], fill=colors.get(v, "white"), outline="black", width=2)
             if v == "?":
                 d.text((x1+12, y1+8), "?", font=FONTB, fill="red")
+            elif v not in colors:
+                # Draw text like "Start", "D", etc.
+                ft = FONTS if len(v) > 2 else FONTB
+                d.text((x1+4, y1+10), v, font=ft, fill="black")
     return img
 
 def draw_staircase(n):

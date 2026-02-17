@@ -3995,14 +3995,7 @@ QUESTIONS = [
     "correct": "B",
     "comment": "Tegyük fel, hogy Aranyban van. Akkor: Arany felirat IGAZ ('itt van'). Ezüst felirat IGAZ ('nem itt van', mert Aranyban van). Két igaz lenne -> NEM JÓ. Tegyük fel, hogy Bronzban van. Arany felirat HAMIS. Ezüst felirat IGAZ ('nem itt'). Bronz felirat IGAZ ('nem Aranyban'). Két igaz -> NEM JÓ. Tegyük fel, hogy Ezüstben van. Arany felirat HAMIS ('nincs ott'). Ezüst felirat HAMIS ('itt van' a valóság, de felirat: 'nem itt'). Bronz felirat IGAZ ('nem Aranyban'). Csak 1 igaz van! Tehát a kincs az Ezüstben van.",
     },
-    {
-    "class": "2",
-    "difficulty": "hard",
-    "question": "Három barát: Anna, Béla és Cili háromféle hangszeren játszik: hegedű, zongora és dob (mindenki egyen). Anna nem zongorázik. Béla nem dobol és nem zongorázik. Ki dobol?",
-    "options": ["Anna", "Béla", "Cili", "Senki", "Mindenki"],
-    "correct": "C",
-    "comment": "Béla nem dob és nem zongora => Béla hegedül. Anna nem zongora, és a hegedű foglalt (Béla) => Anna dobol? Várj. Béla hegedül. Maradt zongora és dob. Anna nem zongorázik => Anna dobol. Cili zongorázik. Kérdés: Ki dobol? Válasz: Anna. Várj, a helyes válasz az 'Anna'. Javítom a kódban.",
-    },
+
     {
     "class": "2",
     "difficulty": "hard",
