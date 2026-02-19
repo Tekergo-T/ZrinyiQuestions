@@ -64,7 +64,7 @@ def main():
     run_script("manual_insert_questions.py")
 
     # Step 2: Image questions
-    run_script("add_image_questions.py")
+    # run_script("add_image_questions.py")
 
     # Step 3: Verify
     print_stats()
