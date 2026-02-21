@@ -4052,6 +4052,22 @@ QUESTIONS = [
     "correct": "D",
     "comment": "A szám 2-vel, 3-mal és 5-tel osztva is 1 maradékot ad. Tehát a szám-1 osztható 2-vel, 3-mal, 5-tel. A legkisebb közös többszörös (2,3,5) = 30. Tehát a szám 30 + 1 = 31.",
     },
+    {
+    "class": "any",
+    "difficulty": "hard",
+    "question": "Három ládikó közül az egyikben arany van, a másik kettő üres. Mindegyik ládikón van egy-egy felirat, de tudjuk, hogy a feliratok közül pontosan egy igaz.\n1. láda: Az arany ebben a ládában van.\n2. láda: Az arany nem ebben a ládában van.\n3. láda: Az arany nem az első ládában van.\nMelyik ládában van az arany?",
+    "options": ["1. láda", "2. láda", "3. láda", "Mindegyikben lehet", "Egyikben sem lehet"],
+    "correct": "B",
+    "comment": "Ha az arany az 1. ládában lenne: 1. felirat igaz, 2. felirat igaz, 3. felirat hamis. (2 igaz)\nHa az arany a 2. ládában lenne: 1. felirat hamis, 2. felirat hamis, 3. felirat igaz. (1 igaz) -> Ez a megoldás.\nHa az arany a 3. ládában lenne: 1. felirat hamis, 2. felirat igaz, 3. felirat igaz. (2 igaz)",
+    },
+    {
+    "class": "any",
+    "difficulty": "hard",
+    "question": "Hány olyan háromjegyű pozitív egész szám van, amelyben a számjegyek összege pontosan 25?",
+    "options": ["4", "5", "6", "7", "8"],
+    "correct": "C",
+    "comment": "A lehetséges számjegyek kombinációi (sorrendtől eltekintve):\n- {9, 9, 7}: 997, 979, 799 (3 darab)\n- {9, 8, 8}: 988, 898, 889 (3 darab)\nÖsszesen: 3 + 3 = 6.",
+    },
 ]
 
 
