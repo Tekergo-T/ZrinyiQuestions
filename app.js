@@ -27,9 +27,9 @@ const ROBLOX_MINUTES_MIN = 1;
 const ROBLOX_MINUTES_MAX = 30;
 const ROBLOX_DAILY_MINUTES_CAP = 30;
 const DIFFICULTY_DISTRIBUTION = {
-    easy: { start: 1, end: 10, count: 10 },
-    medium: { start: 11, end: 20, count: 10 },
-    hard: { start: 21, end: 25, count: 5 }
+    easy: { start: 0, end: 0, count: 0 },
+    medium: { start: 1, end: 15, count: 15 },
+    hard: { start: 16, end: 25, count: 10 }
 };
 
 function pointsToRobloxMinutes(points) {
@@ -656,13 +656,11 @@ function updateTimerDisplay() {
 function generateQuiz() {
     state.currentQuiz = [];
 
-    // User Requirement: At least 2 images, max 10.
-    // We will aim for 5 image questions total (2 Easy, 2 Medium, 1 Hard).
-    const easyQuestions = selectQuestionsMixed('easy', DIFFICULTY_DISTRIBUTION.easy.count, 2);
-    const mediumQuestions = selectQuestionsMixed('medium', DIFFICULTY_DISTRIBUTION.medium.count, 2);
-    const hardQuestions = selectQuestionsMixed('hard', DIFFICULTY_DISTRIBUTION.hard.count, 1);
+    // We will aim for 5 image questions total (3 Medium, 2 Hard).
+    const mediumQuestions = selectQuestionsMixed('medium', DIFFICULTY_DISTRIBUTION.medium.count, 3);
+    const hardQuestions = selectQuestionsMixed('hard', DIFFICULTY_DISTRIBUTION.hard.count, 2);
 
-    state.currentQuiz = [...easyQuestions, ...mediumQuestions, ...hardQuestions];
+    state.currentQuiz = [...mediumQuestions, ...hardQuestions];
 
     // Shuffle the global quiz order so images aren't always first or last in their difficulty block
     // (Though they are correctly ordered by difficulty blocks usually? No, the original code kept them in difficulty blocks)
@@ -890,8 +888,7 @@ function selectAnswer(letter) {
 }
 
 function getDifficultyForNumber(num) {
-    if (num <= 10) return 'easy';
-    if (num <= 20) return 'medium';
+    if (num <= 15) return 'medium';
     return 'hard';
 }
 
@@ -1005,9 +1002,8 @@ function evaluateAnswers() {
             correct++;
             difficultyResults[difficulty].correct++;
 
-            // Difficulty-based points
-            if (i < 10) score += 3;
-            else if (i < 20) score += 4;
+            // Difficulty-based points (balanced for 15 Medium / 10 Hard)
+            if (i < 15) score += 4;
             else score += 5;
         } else {
             wrong++;
@@ -1052,15 +1048,21 @@ function displayResults(correct, wrong, empty, score, difficultyResults) {
     elements.timeUsed.textContent = `⏱️ Felhasznált idő: ${minutes} perc ${seconds} másodperc`;
 
     // Difficulty breakdown
-    const easyPercent = (difficultyResults.easy.correct / difficultyResults.easy.total) * 100;
+    const easyTotal = difficultyResults.easy.total;
+    const easyPercent = easyTotal > 0 ? (difficultyResults.easy.correct / easyTotal) * 100 : 0;
     const mediumPercent = (difficultyResults.medium.correct / difficultyResults.medium.total) * 100;
     const hardPercent = (difficultyResults.hard.correct / difficultyResults.hard.total) * 100;
 
-    elements.easyBar.style.width = `${easyPercent}%`;
+    if (elements.easyBar) {
+        elements.easyBar.style.width = `${easyPercent}%`;
+        const easyBarParent = elements.easyBar.closest('.difficulty-stat');
+        if (easyBarParent && easyTotal === 0) easyBarParent.style.display = 'none';
+        else if (easyBarParent) easyBarParent.style.display = 'block';
+    }
     elements.mediumBar.style.width = `${mediumPercent}%`;
     elements.hardBar.style.width = `${hardPercent}%`;
 
-    elements.easyScore.textContent = `${difficultyResults.easy.correct}/${difficultyResults.easy.total}`;
+    if (elements.easyScore) elements.easyScore.textContent = `${difficultyResults.easy.correct}/${easyTotal}`;
     elements.mediumScore.textContent = `${difficultyResults.medium.correct}/${difficultyResults.medium.total}`;
     elements.hardScore.textContent = `${difficultyResults.hard.correct}/${difficultyResults.hard.total}`;
 
@@ -1090,16 +1092,13 @@ function generatePerformanceAnalysis(correct, difficultyResults) {
         overallAssessment = 'Ne add fel, gyakorlással fejlődhetsz! 💪';
     }
 
-    const easyPercent = (difficultyResults.easy.correct / difficultyResults.easy.total) * 100;
     const mediumPercent = (difficultyResults.medium.correct / difficultyResults.medium.total) * 100;
     const hardPercent = (difficultyResults.hard.correct / difficultyResults.hard.total) * 100;
 
     let focusArea = '';
-    if (easyPercent < 70) {
-        focusArea = 'Érdemes az alapvető feladatokkal kezdeni a gyakorlást.';
-    } else if (mediumPercent < 50) {
+    if (mediumPercent < 60) {
         focusArea = 'A közepes nehézségű feladatok gyakorlása ajánlott.';
-    } else if (hardPercent < 40) {
+    } else if (hardPercent < 50) {
         focusArea = 'A nehéz feladatokon érdemes dolgozni a további fejlődéshez.';
     } else {
         focusArea = 'Minden nehézségi szinten jól teljesítettél!';
