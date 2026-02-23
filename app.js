@@ -979,6 +979,7 @@ function completeQuiz() {
 }
 
 function evaluateAnswers() {
+    let score = 0;
     let correct = 0;
     let wrong = 0;
     let empty = 0;
@@ -989,25 +990,25 @@ function evaluateAnswers() {
         hard: { correct: 0, total: DIFFICULTY_DISTRIBUTION.hard.count }
     };
 
-    let score = 30; // Starting points to avoid negative scores
-
+    // Calculate score based on formula: 4H - R + F = 5H + U
+    // H = correct, R = wrong, U = empty, F = total questions (25)
+    // score = 5*H + U
     for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const question = state.currentQuiz[i];
         const userAnswer = state.userAnswers[i];
-        const correctAnswer = state.currentQuiz[i].correct_answer;
+        const correctAnswer = question.correct_answer;
         const difficulty = getDifficultyForNumber(i + 1);
 
         if (userAnswer === null) {
             empty++;
+            score += 1;
         } else if (userAnswer === correctAnswer) {
             correct++;
+            score += 5;
             difficultyResults[difficulty].correct++;
-
-            // Difficulty-based points (balanced for 15 Medium / 10 Hard)
-            if (i < 15) score += 4;
-            else score += 5;
         } else {
             wrong++;
-            score -= 1; // Penalty for wrong answer
+            // 0 points for wrong answer
         }
     }
 
@@ -1379,7 +1380,7 @@ function exportPdf() {
     </div>
     <div class="questions">${questionsHtml}</div>
     <div class="footer">
-        <p>Időkorlát: 60 perc | Pontozás: Helyes = +4, Hibás = -1, Üres = 0, Alappont = 25</p>
+        <p>Időkorlát: 60 perc | Pontozás: Helyes = 5 pont, Rontott = 0 pont, Üres = 1 pont (Max: 125 pont)</p>
     </div>
     <script>window.onload = () => window.print();</script>
 </body>
