@@ -11,11 +11,112 @@ JS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "db_data.js")
 QUESTIONS = [
     {
         "class": "2",
+        "difficulty": "hard",
+        "correct": "C",
+        "options": ["0", "1", "2", "3", "A gondolt szám felét"],
+        "question": "Gondolj egy számra. Szorzod 3-mal. Hozzáadsz 6-ot. Elosztod 3-mal. Kivonod az eredeti számot. Mit kapsz mindig?",
+        "comment": "Legyen a szám x. ((x*3)+6)/3 - x = (3x+6)/3 - x = x+2 - x = 2. Mindig 2-t kapsz.",
+    },
+    {
+        "class": "2",
+        "difficulty": "hard",
+        "correct": "D",
+        "options": [
+            "Nem lehet megoldani",
+            "1 kapcsoló fel, bemegyek",
+            "2 kapcsoló fel, bemegyek",
+            "1-et felkapcsolok pár percre, lekapcsolom, másikat felkapcsolom, bemegyek",
+            "Véletlenszerű próbálgatás",
+        ],
+        "question": "Egy szobában 3 lámpa van. Kint 3 kapcsoló. Egyszer mehetsz be a szobába. Hogyan tudod biztosan megállapítani, melyik kapcsoló melyik lámpához tartozik?",
+        "comment": "Egyet felkapcsolsz, vársz → az felmelegszik. Leoltod, másikat felkapcsolsz, bemész: Ami ég → második. Ami meleg, de nem ég → első. Ami hideg → harmadik.",
+    },
+    {
+        "class": "2",
+        "difficulty": "hard",
+        "correct": "D",
+        "options": ["Anna", "Béla", "Csaba", "Dóra", "Endre"],
+        "question": "Öten állnak sorban. Anna az első. Endre Anna mögött áll. Dóra Endre mögött áll. Csaba Dóra mögött áll. Béla az utolsó. Ki áll középen?",
+        "comment": "A sorrend: Anna – Endre – Dóra – Csaba – Béla. A középső helyen Dóra áll.",
+    },
+    {
+        "class": "2",
+        "difficulty": "hard",
+        "correct": "C",
+        "options": ["Pista", "Béla", "Cili", "Nem dönthető el", "Mind egyforma"],
+        "question": "Pista magasabb, mint Béla. Béla magasabb, mint Cili. Ki a legalacsonyabb?",
+        "comment": "Ha P > B és B > C, akkor C a legkisebb.",
+    },
+    {
+        "class": "2",
+        "difficulty": "hard",
+        "correct": "C",
+        "options": ["2", "3", "4", "6", "8"],
+        "question": "2 ember 2 perc alatt megy át. 4 ember mennyi idő alatt megy át, ha egyszerre csak ketten mehetnek, és mindenki ugyanannyi idő alatt megy át?",
+        "comment": "Első két ember: 2 perc. Második két ember: még 2 perc. Összesen 4 perc.",
+    },
+    {
+        "class": "2",
+        "difficulty": "hard",
+        "correct": "A",
+        "options": [
+            "Igen",
+            "Nem",
+            "Csak szerencsével",
+            "Csak ha tudjuk, hogy nehezebb",
+            "Csak páros számnál",
+        ],
+        "question": "Van 8 érme, 1 hamis (könnyebb). Kétszer mérhetsz kétkarú mérlegen. Megtalálható biztosan?",
+        "comment": "Első mérés: 3 vs 3. Ha egyenlő → a hamis a maradék 2 között van. Ha nem egyenlő → a könnyebb oldalon van a hamis a 3 közül. Második mérés: 1 vs 1 → kiderül.",
+    },
+    {
+        "class": "2",
+        "difficulty": "hard",
+        "correct": "B",
+        "options": ["0", "2", "3", "5", "Nem lehet tudni"],
+        "question": "Ég 5 gyertya. Kettőt elfújunk. Hány gyertya marad végül?",
+        "comment": "A három ég tovább, és leég. A kettő, amit elfújtunk, megmarad.",
+    },
+    {
+        "class": "2",
+        "difficulty": "hard",
+        "correct": "B",
+        "options": ["8", "10", "12", "14", "16"],
+        "question": "Anna – 8 perc, Béla – 6 perc, Cili – 4 perc. 2 asztal van. Mi a legrövidebb idő, hogy mindhárman végezzenek?",
+        "comment": "Első asztal: 8 perc. Második asztal: 6 perc → utána 4 perc. Teljes idő: 10 perc.",
+    },
+    {
+        "class": "2",
+        "difficulty": "hard",
+        "correct": "C",
+        "options": ["3", "4", "5", "6", "8"],
+        "question": "Egy 4 fokos lépcsőn 1 vagy 2 lépcsőt lehet lépni egyszerre. Hányféleképpen lehet felmenni?",
+        "comment": "Lehetséges sorrendek: 1-1-1-1, 1-1-2, 1-2-1, 2-1-1, 2-2. Összesen 5.",
+    },
+    {
+        "class": "2",
+        "difficulty": "hard",
+        "correct": "C",
+        "options": ["3", "4", "5", "6", "Soha"],
+        "question": "5 gyerek ül körben. Minden percben mindenki átül a jobb oldalán lévő székre. Hány perc múlva ül mindenki újra a saját eredeti helyén?",
+        "comment": "Minden percben mindenki eggyel arrébb megy. Ahhoz, hogy visszaérjen az eredeti helyére, teljes kört kell megtennie. 5 szék van → 5 lépés után lesz mindenki a helyén.",
+    },
+    {
+        "class": "2",
+        "difficulty": "hard",
+        "correct": "A",
+        "options": ["1", "2", "3", "4", "Nem lehet biztosan megoldani"],
+        "question": "Három láda van: az egyikben csak alma, a másikban csak körte, a harmadikban vegyesen van gyümölcs. Mindhárom ládán rossz címke van. Egyetlen gyümölcsöt húzhatsz ki egyetlen ládából. Hány húzás biztosan elég a helyes címkézéshez?",
+        "comment": "Ha a „Vegyes” feliratú ládából húzol, az biztosan nem vegyes. Amit húzol, az mutatja, mi van benne. Onnan a másik kettő már logikusan következik. Ezért 1 húzás elég.",
+    },
+    {
+        "class": "2",
         "correct": "C",
         "difficulty": "medium",
         "options": ["7", "8", "9", "10", "11"],
         "question": "Egy 36 darabos csokoládétáblát 4 gyerek között egyenlően osztunk szét. Hány kocka jut egy "
         "gyereknek?",
+        "comment": "36 / 4 = 9, tehát egy gyerek 9 kockát kap.",
     },
     {
         "class": "2",
@@ -634,8 +735,7 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "3 nyúl (12 láb) és 2 tyúk (4 láb) összesen 5 fej és 16 láb. Várj! 5 fej, 14 láb: 2 nyúl (8 láb) + "
-        "3 tyúk (6 láb) = 14 láb. Tyúkok száma: 3.",
+        "comment": "Legyen a nyulak száma x, a tyúkoké y. Ekkor x+y=5 és 4x+2y=14. A két egyenletből x=2, y=3, tehát 3 tyúk van.",
         "correct": "B",
         "difficulty": "hard",
         "options": ["2", "3", "4", "5", "6"],
@@ -770,14 +870,11 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "Egy 4 háromszög oldalból álló piramisnak (négyszög alapú) 5 csúcsa van (4 az alapon + 1 a "
-        "tetején). Várj, ha 4 háromszög oldala van össz-vissz (tetraéder), akkor 4 csúcsa van. De a legtöbb "
-        "iskolai feladatban ez a 4 az oldallapokra utal, az alap meg egy négyzet. De ha az opció C (5), "
-        "akkor az egy négyzet alapú piramis.",
+        "comment": "Ha egy piramisnak 4 háromszög alakú oldallapja van, akkor négyszög alapú. Ennek 4 alapcsúcsa és 1 csúcsa van, összesen 5.",
         "correct": "C",
         "difficulty": "medium",
         "options": ["3", "4", "5", "6", "8"],
-        "question": "Egy piramisnak 4 háromszög alakú oldala van. Hány csúcsa van a piramisnak?",
+        "question": "Egy piramisnak 4 háromszög alakú oldallapja van (és négyszög alakú alapja). Hány csúcsa van a piramisnak?",
     },
     {
         "class": "2",
@@ -797,8 +894,7 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "I(X) S(O) K(O) L(O) A(X) -> XOOOX. Várj, az opciók között XOOXOX van, talán I-S-K-O-L-A (6 betű)? "
-        "I-S-K-O-L-A -> X-O-O-X-O-X. Igen, ez az.",
+        "comment": "Az ISKOLA szó betűi: I-S-K-O-L-A. A magánhangzók (I, O, A) X-ek, a mássalhangzók (S, K, L) O-k, ezért a minta: XOOXOX.",
         "correct": "A",
         "difficulty": "hard",
         "options": ["XOOXOX", "XOOXXO", "XOXOXX", "OXOXOX", "XOXOXO"],
@@ -1273,7 +1369,7 @@ QUESTIONS = [
         "correct": "C",
         "difficulty": "medium",
         "options": ["8", "18", "20", "22", "24"],
-        "question": "Egy dobozbal 14 piros és 6 kék ceruza van. Hány ceruza van a dobozban?",
+        "question": "Egy dobozban 14 piros és 6 kék ceruza van. Hány ceruza van a dobozban?",
     },
     {
         "class": "2",
@@ -1297,6 +1393,7 @@ QUESTIONS = [
         "difficulty": "medium",
         "options": ["4", "10", "15", "20", "25"],
         "question": "Gondoltam egy számot, elvettem belőle 8-at és 12-t kaptam. Mi volt a szám?",
+        "comment": "Ha x - 8 = 12, akkor x = 20.",
     },
     {
         "class": "2",
@@ -1304,6 +1401,7 @@ QUESTIONS = [
         "difficulty": "medium",
         "options": ["4", "6", "8", "10", "12"],
         "question": "Hány sarka van két téglalapnak összesen?",
+        "comment": "Egy téglalapnak 4 sarka van, ezért kettőnek 2 * 4 = 8.",
     },
     {
         "class": "2",
@@ -1797,8 +1895,7 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "A megadott válasz (10. nap) szerint talán a perem elérése és a kimászás között van különbség, vagy "
-        "a számolás úgy szól, hogy 10 nap kell a teljes feljutáshoz.",
+        "comment": "A 8. nap végén 8 méteren van. A 9. nap nappal felmászik 2 métert, így eléri a 10 méteres peremet, tehát a 9. napon ér fel.",
         "correct": "B",
         "difficulty": "medium",
         "options": ["8.", "9.", "10.", "11.", "12."],
@@ -1821,6 +1918,7 @@ QUESTIONS = [
         "options": ["12", "13", "14", "15", "16"],
         "question": "Hat barát találkozik, és mindenki mindenkivel pontosan egyszer kezet fog. Hány kézfogás történik "
         "összesen?",
+        "comment": "A kézfogások száma: 6*5/2 = 15.",
     },
     {
         "class": "2",
@@ -1871,6 +1969,7 @@ QUESTIONS = [
         "difficulty": "medium",
         "options": ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Vasárnap"],
         "question": "Tegnapelőtt azt mondtam, hogy holnapután kedd lesz. Milyen nap van ma?",
+        "comment": "Tegnapelőtt a 'holnapután' a tegnap volt, tehát tegnap kedd volt. Ezért ma szerda van.",
     },
     {
         "class": "2",
@@ -2201,12 +2300,12 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "A 2 és 3 legkisebb közös többszöröse a 6. 6 + 1 = 7.",
+        "comment": "A szám 1-gyel nagyobb, mint 6 többszöröse (mert 2-vel és 3-mal osztva is 1 a maradék). Egynél több cukorka esetén a legkisebb ilyen szám: 7.",
         "correct": "D",
         "difficulty": "hard",
         "options": ["4", "5", "6", "7", "8"],
         "question": "Egy zacskóban cukorkák vannak. Ha kettesével vesszük ki, 1 marad. Ha hármasával, akkor is 1 "
-        "marad. Legalább hány cukorka van a zacskóban, ha tudjuk, hogy van benne?",
+        "marad. Legalább hány cukorka van a zacskóban, ha tudjuk, hogy egynél több van benne?",
     },
     {
         "class": "2",
@@ -2715,14 +2814,11 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "Ha ad 2-t és egyenlő lesz, akkor eredetileg 4-gyel több volt neki (2-t ad, a másik 2-t kap). "
-        "15-ből a különbség (4) levonása után 11 marad, felezve 5.5 - nem egész?? Várj. Anna = Béla + 4. "
-        "A+B=15. 2B+4=15 => 2B=11. Nem lehet egész alma. Hiba a logikában? Ha Anna ad 2-t, A-2 = B+2. A = "
-        "B+4. A+B=15. B+4+B=15 -> 2B=11. Valóban nem jön ki egészre. Módosítom a kérdést: Összesen 16 alma.",
-        "correct": "C",
+        "comment": "Ha Anna ad 2 almát Bélának, akkor egyenlők lesznek: A-2 = B+2, tehát A-B = 4. Mivel együtt 16 almájuk van, A+B = 16. Innen A = 10.",
+        "correct": "D",
         "difficulty": "hard",
         "options": ["7", "8", "9", "10", "11"],
-        "question": "Annának és Bélának összesen 15 almája van. Ha Anna ad Bélának 2 almát, akkor ugyanannyi almájuk "
+        "question": "Annának és Bélának összesen 16 almája van. Ha Anna ad Bélának 2 almát, akkor ugyanannyi almájuk "
         "lesz. Hány almája volt Annának eredetileg?",
     },
     {
@@ -2744,13 +2840,8 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "Hétfő reggel: 10 (duplázás után este? Nem, reggel dupláz, de betettük. Tegyük fel este dupláz vagy "
-        "másnap reggel? 'Minden reggel'. Ha Hétfő reggel beteszem, Kedd reggel dupláz: 20. Szerda: 40. "
-        "Csütörtök: 80. Péntek: 160. Tehát Péntek. Vagy ha azonnal dupláz? 'Betettünk 10-et', a doboz "
-        "'minden reggel' dupláz. Ha Hétfő reggel már megtörtént a duplázás vagy még nem? Tegyük fel: Hétfőn "
-        "beteszem => Kedd reggel 20, Szerda 40, Csütörtök 80, Péntek 160. Válasz: Péntek. Ha a kérdés úgy "
-        "szól 'mikor lesz benne', akkor Péntek reggel.",
-        "correct": "B",
+        "comment": "Hétfő reggel 10 Ft van benne. Mivel minden reggel duplázódik: kedd 20, szerda 40, csütörtök 80, péntek 160. Először pénteken lesz 100 Ft-nál több.",
+        "correct": "C",
         "difficulty": "hard",
         "options": ["Szerda", "Csütörtök", "Péntek", "Szombat", "Vasárnap"],
         "question": "Egy bűvös doboz minden reggel megduplázza a benne lévő pénzt. Hétfő reggel betettünk 10 Ft-ot. "
@@ -2878,12 +2969,11 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "A szó 44 betűből áll. Ez a leghosszabb magyar szó.",
+        "comment": "A szó 44 betűből áll.",
         "correct": "C",
         "difficulty": "hard",
         "options": ["40", "42", "44", "45", "50"],
-        "question": "Hány betű van a leghosszabb magyar szóban, amit le tudsz írni? (Nem, ez túl nyitott). Helyette: "
-        "Hány betűs a 'MEGSZENTSÉGTELENÍTHETETLENSÉGESKEDÉSEITEKÉRT' szó?",
+        "question": "Hány betűs a 'MEGSZENTSÉGTELENÍTHETETLENSÉGESKEDÉSEITEKÉRT' szó?",
     },
     {
         "class": "2",
@@ -2925,20 +3015,12 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "Ha Laci igazat mond, akkor Feri hazudik. Nézzük meg Feri állítását ('Laci igazat mond'). Ha Feri "
-        "hazudik, akkor ez az állítás hamis, tehát Laci nem mond igazat? Ez ellentmondás. Várj. Újra: Ha "
-        "Laci IGAZ, akkor Feri HAZUG. Feri azt mondja 'Laci IGAZ'. Ez IGAZ állítás lenne, de Feri HAZUG, "
-        "tehát nem mondhat igazat. Tehát ez az eset lehetetlen. Nézzük a fordítottját: Laci HAZUG, Feri "
-        "IGAZ. Laci azt mondja 'Bátyám (Feri) hazudik'. Ez HAZUGSÁG, tehát Feri IGAZmondó. Ez stimmel. Feri "
-        "azt mondja 'Laci IGAZ'. De Feri IGAZmondó, tehát ennek igaznak kell lennie -> Laci IGAZ. De Laci "
-        "HAZUG. Ez is ellentmondás! Állj! A klasszikus feladatnál: 'Egy szigeten...'. Ha Laci azt mondja "
-        "'Feri hazudik', és Feri azt mondja 'Mi mindketten hazudunk'. Akkor Laci IGAZ, Feri HAZUG. "
-        "Módosítom a kérdést egy biztosan megoldhatóra.",
-        "correct": "A",
+        "comment": "Laci és Feri állításai egymás ellentétei: egyik szerint Feri hazudik, a másik szerint Laci hazudik. A feltételek alapján nem dönthető el egyértelműen, hogy közülük ki az igazmondó.",
+        "correct": "E",
         "difficulty": "hard",
         "options": ["Laci", "Feri", "Mindkettő", "Egyik sem", "Nem lehet tudni"],
         "question": "Két testvér, Laci és Feri közül az egyik mindig igazat mond, a másik mindig hazudik. Laci azt "
-        "mondja: 'A testvérem mindig hazudik'. Feri azt mondja: 'Laci mindig igazat mond'. Ki mond "
+        "mondja: 'A testvérem mindig hazudik'. Feri azt mondja: 'Laci mindig hazudik'. Ki mond "
         "igazat?",
     },
     {
@@ -3009,11 +3091,11 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "Javítom a kérdést.",
+        "comment": "A feltételek szerint a szám páros, 16-nál nagyobb, 20-nál kisebb, és osztható 3-mal. Ezek közül csak a 18 felel meg.",
         "correct": "E",
         "difficulty": "hard",
         "options": ["12", "14", "15", "16", "18"],
-        "question": "Gondoltam egy számra. A szám páros. Nagyobb, mint 10, de kisebb, mint 20. Osztható 3-mal. Melyik "
+        "question": "Gondoltam egy számra. A szám páros. Nagyobb, mint 16, de kisebb, mint 20. Osztható 3-mal. Melyik "
         "ez a szám?",
     },
     {
@@ -3254,18 +3336,6 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "Z+K=3, P+K=4, P+Z=5. Összeadva: 2(P+Z+K)=12 => P+Z+K=6. Valami nem stimmel az adatokkal... "
-        "várjunk: x+y+1=4 => x+y=3. 3+3+3/2... ha 9 golyó van: (P:3, Z:2, K:1) nem jó. Ha P=2, Z=3, K=4: "
-        "kihúzni pirosat=Z+K+1=8 nem. P=3, Z=2, K=1: kihúzni pirosat=2+1+1=4. Kihúzni zöldet=3+1+1=5. "
-        "Kihúzni kéket=3+2+1=6. Összesen 3+2+1=6. A válasz 6? Várjunk: 6 (A).",
-        "correct": "C",
-        "difficulty": "hard",
-        "options": ["6", "8", "9", "12", "15"],
-        "question": "A dobozban piros, zöld és kék golyók vannak. Legalább 4 kell pirosért, 5 zöldért, 6 kékért. Hány "
-        "golyó van összesen?",
-    },
-    {
-        "class": "2",
         "comment": "Ha Tréfi nyert, akkor Ügyi igazat mond, Törpilla és Tréfi hazudik, Okoska hazudik. Ez 1 igaz. Ha "
         "más nyert, több igaz is lehet.",
         "correct": "C",
@@ -3291,6 +3361,454 @@ QUESTIONS = [
         "options": ["2", "3", "4", "5", "6"],
         "question": "Hány gyermek van abban a családban, ahol mindenki legalább egy fiú és egy lány testvérrel "
         "rendelkezik?",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Sorban állásnál Zsófi elölről a 3., hátulról a 4. Hányan állnak a sorban?",
+        "options": ["5", "6", "7", "8", "9"],
+        "comment": "Zsofi a 3., tehát előtte 2-en vannak. Hátulról a 4., mögötte 3-an. Összesen: 2 (előtte) + 1 (Zsófi) + 3 (mögötte) = 6.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Egy könyvet olvasok. A 12. oldalnál tartok, és tegnap a 8. oldalnál kezdtem. Hány oldalt olvastam el eddig a könyvből (ha a 8. és a 12. oldalt is beleszámoljuk)?",
+        "options": ["3", "4", "5", "6", "7"],
+        "comment": "Megszámolva: 8, 9, 10, 11, 12. Ez pontosan 5 oldal.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Egy szalagot 4 helyen vágtunk el ollóval. Hány darab szalagunk lett így?",
+        "options": ["3", "4", "5", "6", "10"],
+        "comment": "Minden vágás növeli a darabok számát. 1 vágás = 2 darab, 4 vágás = 5 darab.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Holnapután szerda lesz. Milyen nap volt tegnapelőtt?",
+        "options": ["Péntek", "Szombat", "Vasárnap", "Hétfő", "Kedd"],
+        "comment": "Ha holnapután szerda, akkor ma hétfő van. Hétfő előtt tegnapelőtt szombat volt.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Egy udvaron 2 kutya és 3 tyúk van. Hány lábuk van összesen?",
+        "options": ["10", "12", "14", "16", "18"],
+        "comment": "2 kutya = 8 láb. 3 tyúk = 6 láb. 8 + 6 = 14 láb.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Egy családban 3 lánytestvér van. Minden lánynak van 1 fiútestvére. Hány gyerek van összesen a családban?",
+        "options": ["3", "4", "5", "6", "7"],
+        "comment": "Az az 1 fiú mindhárom lánynak a testvére. Összesen 3 lány + 1 fiú = 4 gyerek.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Egy négyzet alakú papírlapot az egyik sarkától a szemközti sarkáig (átlósan) kettévágunk. Milyen alakzatokat kapunk?",
+        "options": [
+            "2 téglalapot",
+            "2 négyzetet",
+            "2 háromszöget",
+            "4 háromszöget",
+            "1 háromszöget és 1 téglalapot",
+        ],
+        "comment": "Az átlós vágás két egyforma háromszögre osztja a négyzetet.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Petinek 8 évesen feleannyi idős volt a húga, mint ő. Peti most 12 éves. Hány éves a húga?",
+        "options": ["4", "6", "8", "10", "12"],
+        "comment": "Amikor Peti 8 volt, a húga 4, tehát a korkülönbség 4 év. Most, hogy Peti 12, a húga 12 - 4 = 8 éves.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Anna magasabb, mint Béla, de alacsonyabb, mint Csaba. Ki a legmagasabb hármuk közül?",
+        "options": ["Anna", "Béla", "Csaba", "Egyforma magasak", "Nem lehet tudni"],
+        "comment": "Csaba > Anna > Béla. Így Csaba a legmagasabb.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "D",
+        "question": "Egy lift a 2. emeletről indul. Felmegy 3 emeletet, majd leereszkedik 1 emeletet. Hányadik emeleten van most?",
+        "options": ["1.", "2.", "3.", "4.", "5."],
+        "comment": "2. emeletről 3 fel = 5. emelet. 1 le = 4. emelet.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Ha 3 gyerek egyszerre fog kezet mindenkivel, hány kézfogás történik összesen?",
+        "options": ["1", "2", "3", "4", "6"],
+        "comment": "Az első kezet fog a másik kettővel (2 kézfogás). A második már csak a harmadikkal (1 kézfogás). 2 + 1 = 3.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Egy fiókban 3 pár piros és 2 pár kék zokni van. Hány darab zokni van a fiókban összesen?",
+        "options": ["5", "8", "10", "12", "15"],
+        "comment": "Összesen 5 pár zokni van, ami páronként 2 darab, azaz 5 * 2 = 10 darab zokni.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "A",
+        "question": "Peti gyorsabban fut, mint Gergő. Tomi lassabban fut, mint Gergő. Ki a leggyorsabb?",
+        "options": ["Peti", "Gergő", "Tomi", "Egyformán gyorsak", "Nem lehet tudni"],
+        "comment": "Peti gyorsabb Gergőnél, Gergő pedig Tominál. Tehát Peti a leggyorsabb.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Egy futóversenyen megelőzöd a 2. helyen futó versenyzőt. Hányadik helyen futsz most?",
+        "options": ["1.", "2.", "3.", "Utolsó", "Nem lehet tudni"],
+        "comment": "Ha megelőzöd a másodikat, akkor te veszed át az ő helyét, tehát te leszel a 2.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Egy kerítés 3 egyforma szakaszát 30 perc alatt festi le Tomi. Hány percig tart neki lefesteni 1 szakaszt?",
+        "options": ["5", "10", "15", "20", "30"],
+        "comment": "Ha 3 szakasz 30 perc, akkor 1 szakasz 30 / 3 = 10 perc.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Egy sötét szobában a fiókban 5 fekete és 5 fehér zokni van összekeveredve. Legalább hány zoknit kell kivenned, hogy biztosan legyen egy egyforma pár?",
+        "options": ["2", "3", "5", "6", "10"],
+        "comment": "Ha kiveszel kettőt, lehetnek felemásak. De a harmadik már biztosan passzolni fog az egyikhez, mert csak 2 szín van.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "A",
+        "question": "A szárítókötélen 1 póló 1 óra alatt szárad meg. Hány óra alatt szárad meg 5 póló, ha mindet egyszerre teregetik ki?",
+        "options": ["1", "2", "3", "4", "5"],
+        "comment": "Ha egyszerre száradnak, akkor ugyanúgy 1 óra kell mindegyiknek.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Egy vonatban a büfékocsi elölről számolva a 3., hátulról számolva a 4. kocsi. Hány kocsiból áll a vonat?",
+        "options": ["5", "6", "7", "8", "9"],
+        "comment": "3 (elölről) + 4 (hátulról) - 1 (maga a büfékocsi) = 6.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Egy 10 fokos lépcsőn állsz az 1. fokon. Felmész 4-et, majd lemész 2-t, és újra felmész 3-at. Hányadik lépcsőfokon állsz?",
+        "options": ["4.", "5.", "6.", "7.", "8."],
+        "comment": "1 + 4 = 5. Majd 5 - 2 = 3. Végül 3 + 3 = 6. lépcsőfok.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "A polcon a matekkönyv bal oldalán 2 könyv van, jobb oldalán pedig 4. Hány könyv van összesen a polcon?",
+        "options": ["5", "6", "7", "8", "9"],
+        "comment": "2 könyv balra + a matekkönyv + 4 könyv jobbra = 7 könyv.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Az asztalon van 5 alma. Ha elveszel belőle 3-at, hány almád lesz?",
+        "options": ["0", "2", "3", "5", "8"],
+        "comment": "Te vetted el, tehát neked pontosan annyi van, amennyit elvettél: 3 almád lesz.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "D",
+        "question": "Kettő darab, kettőbe vágott alma hány darab almafelet jelent összesen?",
+        "options": ["1", "2", "3", "4", "6"],
+        "comment": "1 darab alma 2 felet jelent. 2 darab alma tehát 2 x 2 = 4 felet.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Melyik szám következik a sorban: 2, 4, 6, 8, ...?",
+        "options": ["9", "10", "11", "12", "14"],
+        "comment": "A páros számok növekednek kettesével, tehát a következő a 10.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Melyik szó nem illik a többi közé logikailag?",
+        "options": ["Kutya", "Macska", "Asztal", "Tehén", "Ló"],
+        "comment": "Az asztal egy bútor, a többi mind élőlény (állat).",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "A zsebemben lévő 3 érme összege pont 15 forint. Milyen érmék ezek, ha csak 5, 10 vagy 20 forintosok léteznek?",
+        "options": [
+            "1 db 5 Ft és 1 db 10 Ft",
+            "3 db 5 Ft",
+            "2 db 5 Ft és 1 db 10 Ft",
+            "Nem lehet 3 érméből kirakni",
+            "1 db 10 Ft és 1 db 20 Ft",
+        ],
+        "comment": "5 + 5 + 5 = 15, így 3 db 5 forintos érme.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Egy csiga egy 5 méter mély kútból mászik kifelé. Nappal felmászik 3 métert, éjjel visszacsúszik 2 métert. Hányadik napon ér ki a kútból?",
+        "options": ["1.", "2.", "3.", "4.", "5."],
+        "comment": "1. nap: 1m. 2. nap: 2m. 3. nap nappal felmászik 3 métert, így eléri az 5 métert és kiér.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "A",
+        "question": "Egy béka előre ugrik 2-t, majd hátra 1-et. Hányat kell ugrania összesen, hogy 3 lépésnyire távolodjon el a kezdőponttól?",
+        "options": ["3", "4", "5", "6", "7"],
+        "comment": "Ugrások: +2, -1, +2. Ekkor 0-ról 3-ra jut, tehát összesen 3 ugrás kell.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Anna, Béla, Cili és Dóra körbeülnek egy asztalt. Anna szemben ül Bélával. Cili Anna jobb oldalán ül. Ki ül Anna bal oldalán?",
+        "options": ["Béla", "Cili", "Dóra", "Egyikük sem", "Nem tudjuk"],
+        "comment": "Mivel 4-en vannak, és 3 hely már elfoglalt, Anna bal oldalán csak Dóra ülhet.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Apának van két 10 forintosa és három 5 forintosa a zsebében. Mennyi pénze van összesen?",
+        "options": ["25 Ft", "30 Ft", "35 Ft", "40 Ft", "45 Ft"],
+        "comment": "2 x 10 = 20 forint. 3 x 5 = 15 forint. 20 + 15 = 35 forint.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Bújócskát játszik 10 gyerek. Egyikük a hunyó. Már megtalált 6 gyereket. Hányan vannak még elbújva?",
+        "options": ["2", "3", "4", "5", "6"],
+        "comment": "Összesen 10 gyerek, mínusz 1 hunyó = 9 bújik el. 9-ből megtalált 6-ot, tehát 3 maradt.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "3 szál egyforma hosszú gyufából milyen zárt síkidomot tudsz kirakni anélkül, hogy eltörnéd őket?",
+        "options": ["Négyzetet", "Háromszöget", "Kört", "Téglalapot", "Hatszöget"],
+        "comment": "3 oldalú zárt síkidom a háromszög.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "D",
+        "question": "Hány pötty van azon a hagyományos dominón, amelyiknek mindkét felén a lehető legtöbb pötty van?",
+        "options": ["6", "8", "10", "12", "14"],
+        "comment": "A dupla hatos dominó mindkét oldalán 6 pötty van, 6 + 6 = 12.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Egy kocsikeréknek 4 küllője van. Hány egyforma részre osztják a kereket ezek a küllők?",
+        "options": ["2", "3", "4", "5", "6"],
+        "comment": "4 küllő pontosan 4 cikkelyre osztja a kört.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Misi minden nap megeszik pontosan 2 almát. Hány nap alatt fogy el neki 10 alma?",
+        "options": ["3", "4", "5", "6", "10"],
+        "comment": "10 alma, elosztva napi 2-vel, az 5 nap.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Pontban délben elindultam arra, amerről a nap sütött. Milyen égtáj felé sétáltam?",
+        "options": ["Észak", "Dél", "Kelet", "Nyugat", "Felfelé"],
+        "comment": "A nap délben mindig déli irányban látszik (az északi féltekén).",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Gabi bal keze felől fúj a szél. Merre dőlnek a fák a kertben emiatt?",
+        "options": ["Balra", "Jobbra", "Előre", "Hátra", "Nem dőlnek semerre"],
+        "comment": "A szél a maga irányába fújja a fákat, tehát ha balról fúj, jobbra dőlnek el.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "A",
+        "question": "Van 3 macska. Mindegyik macska előtt van 2 macska. Hogy lehet ez?",
+        "options": [
+            "Körben ülnek",
+            "Egy sorban állnak",
+            "Ketten szemben, egy oldalt",
+            "A tükörbe néznek",
+            "Nem lehetséges",
+        ],
+        "comment": "Ha körben ülnek egymás farkát figyelve, akkor mindegyikük 2 macskát lát maga előtt a kör mentén.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Melyik az a szám a nullán kívül, amelyiket ha összeadjuk önmagával, és megszorozzuk önmagával, ugyanazt az eredményt kapjuk?",
+        "options": ["1", "2", "3", "4", "5"],
+        "comment": "2 + 2 = 4, és 2 x 2 = 4.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "D",
+        "question": "Peti egy hideg, sötét szobában van. Van nála egy gyertya, egy olajlámpa és egy papírrakás, de csak egyetlen gyufája van. Mit gyújt meg legelőször?",
+        "options": [
+            "A gyertyát",
+            "Az olajlámpát",
+            "A papírt",
+            "A gyufát",
+            "Mindegyiket egyszerre",
+        ],
+        "comment": "Bármi mást csak akkor tud meggyújtani, ha először a gyufát gyújtja meg.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Hány ujj van összesen 10 emberi kézen összegyűjtve?",
+        "options": ["10", "20", "50", "100", "Nem lehet tudni"],
+        "comment": "1 kézen 5 ujj van. 10 x 5 = 50 ujj.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Egy papírra felírtam a 86-os számot. Hogyan csinálhatok belőle nagyobbat anélkül, hogy átírnám vagy hozzáírnék a számhoz?",
+        "options": [
+            "Radírozással",
+            "Fejjel lefelé fordítom a papírt",
+            "Tükörbe nézem",
+            "Nem lehet",
+            "Kiszínezem",
+        ],
+        "comment": "Ha fejjel lefelé fordítjuk a papírt, a 86-os számból 98 lesz, ami nagyobb.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "D",
+        "question": "Egy kosárban 5 alma van. Hogyan tudod úgy szétosztani 5 gyerek között, hogy mindenki kapjon egy almát, de 1 alma mégis a kosárban maradjon?",
+        "options": [
+            "Kettévágva az almákat",
+            "Az egyik gyerek nem kap",
+            "Senki sem kap almát",
+            "Az utolsó gyerek a kosárral együtt kapja az almát",
+            "Lehetetlen",
+        ],
+        "comment": "Az ötödik gyereknek a kosárban benne hagyva adjuk oda az utolsó almát.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "E",
+        "question": "Az év melyik hónapjában van 28 nap?",
+        "options": [
+            "Csak februárban",
+            "Májusban",
+            "Augusztusban",
+            "Októberben",
+            "Minden hónapban",
+        ],
+        "comment": "Minden hónapban van legalább 28 nap.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Ha egy orvos 3 tablettát ír fel, és azt mondja, hogy fél óránként vegyél be egyet, mennyi idő alatt fogy el az összes tabletta?",
+        "options": ["Fél óra", "1 óra", "Másfél óra", "2 óra", "3 óra"],
+        "comment": "Az elsőt beveszed most. Fél óra múlva a másodikat. Fél óra múlva a harmadikat. Összesen 1 óra.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Két apa és két fiú horgászik. Összesen 3 halat fognak, és mindegyikük pontosan egy halat visz haza. Hogyan lehetséges ez?",
+        "options": [
+            "Az egyik hal aranyhal volt",
+            "Egymástól lopták a halat",
+            "Valójában ez egy nagyapa, az ő fia, és annak a fia (az unoka)",
+            "Volt egy harmadik fiú is",
+            "Két halat megettek ott a helyszínen",
+        ],
+        "comment": "A fiú egyszerre apa (az unokának) és fiú (a nagyapának). Így hárman vannak összesen.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "D",
+        "question": "Melyik az a betű, amelyik a VÍZ szóban benne van, de a JÉG szóban nincs?",
+        "options": ["J", "É", "G", "V", "Egyik sem"],
+        "comment": "A V betű szerepel a Víz-ben, de nem a Jég-ben.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "B",
+        "question": "Tomi 1-től 10-ig összeadta a számokat. Zoli 1-től 10-ig összeszorozta a számokat. Vajon melyik fiú eredménye lett a nagyobb?",
+        "options": ["Tomié", "Zolié", "Egyenlő", "Mindkettő 0", "Nem lehet kiszámolni"],
+        "comment": "A szorzás sokkal gyorsabban növeli a számot (pl. már csak az 5*6*7 is jóval több az összegnél).",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "D",
+        "question": "Gergőnek 3 nővére és 2 bátyja van. Hány gyerek van ebben a családban összesen?",
+        "options": ["3", "4", "5", "6", "7"],
+        "comment": "Gergő + 3 nővér + 2 báty = 6 gyerek.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "C",
+        "question": "Egy dobókockának hány lapja van?",
+        "options": ["4", "5", "6", "8", "12"],
+        "comment": "A kockának 6 négyzet alakú oldala (lapja) van.",
+    },
+    {
+        "class": "2",
+        "difficulty": "easy",
+        "correct": "A",
+        "question": "A fán 6 madár ült. Egy vadász elsütött egy durranó puskát és egyet eltalált. Hány madár maradt a fán?",
+        "options": ["0", "1", "4", "5", "6"],
+        "comment": "A nagy zajtól az összes többi madár elrepült, egy sem maradt a fán.",
     },
 ]
 

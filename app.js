@@ -15,11 +15,12 @@ const state = {
     timeRemaining: 60 * 60, // 1 hour in seconds
     startTime: null,
     endTime: null,
-    user: null // { name: string, totalScore: number, history: [] }
+    user: null, // { name: string, totalScore: number, history: [] }
+    selectedDifficulties: ['medium', 'hard']
 };
 
 // ===== Constants =====
-const TOTAL_QUESTIONS = 25;
+let TOTAL_QUESTIONS = 25;
 const QUIZ_DURATION = 60 * 60; // 1 hour in seconds
 const ROBLOX_POINTS_MIN = 105;
 const ROBLOX_POINTS_MAX = 125;
@@ -604,9 +605,143 @@ function showScreen(screenId) {
 // ===== Class Selection =====
 function selectClass(classLevel) {
     state.selectedClass = classLevel;
+    
+    // Highlight selected class
+    document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.class-btn[data-class="${classLevel}"]`).classList.add('active');
+
+    setupSliders(classLevel);
+}
+
+function setupSliders(classLevel) {
+    const diffCounts = { 'easy': 0, 'medium': 0, 'hard': 0 };
+    const GOAL_TOTAL = 25;
+    
+    const query = `SELECT difficulty, COUNT(*) FROM questions WHERE class = ? GROUP BY difficulty`;
+    try {
+        const result = state.db.exec(query, [classLevel]);
+        if (result.length > 0) {
+            result[0].values.forEach(row => {
+                diffCounts[row[0]] = row[1];
+            });
+        }
+    } catch (e) {
+        console.error('Hiba a lekérdezés során:', e);
+    }
+    
+    const sliders = ['easy', 'medium', 'hard'];
+    
+    // Initial Distribution: Try to meet 25 by prioritizing Medium, then Hard, then Easy
+    let remaining = GOAL_TOTAL;
+    const initialVals = { easy: 0, medium: 0, hard: 0 };
+    
+    // Distribution strategy: 10 Medium, 10 Hard, 5 Easy (if available)
+    initialVals.medium = Math.min(diffCounts.medium, 10);
+    remaining -= initialVals.medium;
+    
+    initialVals.hard = Math.min(diffCounts.hard, remaining);
+    remaining -= initialVals.hard;
+    
+    initialVals.easy = Math.min(diffCounts.easy, remaining);
+    remaining -= initialVals.easy;
+    
+    // If still remaining, dump into whatever has space
+    if (remaining > 0) {
+        ['hard', 'medium', 'easy'].forEach(d => {
+            const extra = Math.min(diffCounts[d] - initialVals[d], remaining);
+            initialVals[d] += extra;
+            remaining -= extra;
+        });
+    }
+
+    const updateSliderUI = () => {
+        let currentTotal = 0;
+        sliders.forEach(d => {
+            const val = parseInt(document.getElementById(`slider-${d}`).value) || 0;
+            currentTotal += val;
+            document.getElementById(`count-${d}`).textContent = val;
+            document.getElementById(`max-${d}`).textContent = diffCounts[d];
+        });
+        
+        const startBtn = document.querySelector('.difficulty-selection .btn-primary');
+        if (startBtn) {
+            if (currentTotal !== GOAL_TOTAL) {
+                startBtn.disabled = true;
+                startBtn.style.opacity = '0.5';
+                startBtn.textContent = `Válassz pontosan ${GOAL_TOTAL} kérdést! (${currentTotal})`;
+            } else {
+                startBtn.disabled = false;
+                startBtn.style.opacity = '1';
+                startBtn.textContent = 'Kvíz Indítása';
+            }
+        }
+    };
+
+    const setSlider = (diff, maxCount, initialValue) => {
+        const slider = document.getElementById(`slider-${diff}`);
+        slider.min = "0";
+        slider.max = maxCount;
+        slider.value = initialValue;
+
+        slider.oninput = function() {
+            // Smart adjustment: find another slider to compensate
+            let val = parseInt(this.value);
+            let total = 0;
+            sliders.forEach(d => total += parseInt(document.getElementById(`slider-${d}`).value));
+            
+            let diff_val = total - GOAL_TOTAL;
+            
+            if (diff_val !== 0) {
+                // Try to adjust other sliders
+                const others = sliders.filter(d => d !== diff);
+                for (let other_d of others) {
+                    const other_slider = document.getElementById(`slider-${other_d}`);
+                    const other_val = parseInt(other_slider.value);
+                    const adjustment = Math.min(Math.max(-diff_val, -other_val), parseInt(other_slider.max) - other_val);
+                    
+                    if (adjustment !== 0) {
+                        other_slider.value = other_val + adjustment;
+                        diff_val += adjustment;
+                    }
+                    if (diff_val === 0) break;
+                }
+                
+                // If still not 0, revert this slider's change partially
+                if (diff_val !== 0) {
+                    this.value = val - diff_val;
+                }
+            }
+            updateSliderUI();
+        };
+    };
+    
+    sliders.forEach(d => setSlider(d, diffCounts[d], initialVals[d]));
+    updateSliderUI();
+
+    document.getElementById('slider-container').classList.remove('hidden');
+}
+
+function startConfiguredQuiz() {
+    state.sliderConfig = {
+        'easy': parseInt(document.getElementById('slider-easy').value) || 0,
+        'medium': parseInt(document.getElementById('slider-medium').value) || 0,
+        'hard': parseInt(document.getElementById('slider-hard').value) || 0
+    };
+    
+    const totalSelected = state.sliderConfig.easy + state.sliderConfig.medium + state.sliderConfig.hard;
+    
+    if (totalSelected !== TOTAL_QUESTIONS) {
+        if (typeof showAlert !== 'undefined') showAlert(`Kérlek válassz pontosan ${TOTAL_QUESTIONS} kérdést!`);
+        else alert(`Kérlek válassz pontosan ${TOTAL_QUESTIONS} kérdést!`);
+        return;
+    }
+    
+    TOTAL_QUESTIONS = totalSelected;
+    state.selectedDifficulties = Object.keys(state.sliderConfig).filter(diff => state.sliderConfig[diff] > 0);
+    
     state.currentQuestionIndex = 0;
     state.userAnswers = new Array(TOTAL_QUESTIONS).fill(null);
-    elements.selectedClass.textContent = `${classLevel}. osztály`;
+    elements.selectedClass.textContent = `${state.selectedClass}. osztály`;
 
     generateQuiz();
     startTimer();
@@ -656,18 +791,25 @@ function updateTimerDisplay() {
 function generateQuiz() {
     state.currentQuiz = [];
 
-    // We will aim for 5 image questions total (3 Medium, 2 Hard).
-    const mediumQuestions = selectQuestionsMixed('medium', DIFFICULTY_DISTRIBUTION.medium.count, 3);
-    const hardQuestions = selectQuestionsMixed('hard', DIFFICULTY_DISTRIBUTION.hard.count, 2);
+    ['easy', 'medium', 'hard'].forEach(diff => {
+        const count = state.sliderConfig[diff];
+        if (count > 0) {
+            // Distribution of images: aim for ~20% of questions being images
+            let imageCount = Math.round(count * 0.2); 
+            const diffQuestions = selectQuestionsMixed(diff, count, imageCount);
+            state.currentQuiz.push(...diffQuestions);
+        }
+    });
 
-    state.currentQuiz = [...mediumQuestions, ...hardQuestions];
+    // CRITICAL: If still missing questions (should not happen with sliders), 
+    // fallback ONLY to requested grade, but strictly maintaining count if possible.
+    if (state.currentQuiz.length < TOTAL_QUESTIONS) {
+        console.warn('Quiz shorter than intended, filling gaps...');
+        const missing = TOTAL_QUESTIONS - state.currentQuiz.length;
+        const fallback = getQuestionsByType('hard', missing, false); // Try hard text
+        state.currentQuiz.push(...fallback);
+    }
 
-    // Shuffle the global quiz order so images aren't always first or last in their difficulty block
-    // (Though they are correctly ordered by difficulty blocks usually? No, the original code kept them in difficulty blocks)
-    // The original code was: [...easy, ...medium, ...hard]. We should keep that difficulty progression.
-    // But WITHIN each difficulty, we want to shuffle so images aren't always at the top.
-
-    ensureQuizLength();
     incrementShownCounts();
 
     renderQuestionIndicators();
@@ -675,13 +817,12 @@ function generateQuiz() {
 }
 
 function selectQuestionsMixed(difficulty, totalCount, imageCount) {
-    const textCount = totalCount - imageCount;
-
     // 1. Get Image Questions
     const imageQ = getQuestionsByType(difficulty, imageCount, true);
-
-    // 2. Get Text Questions
-    const textQ = getQuestionsByType(difficulty, textCount, false);
+    
+    // 2. Get Text Questions to fill the rest of the totalCount
+    const textNeeded = totalCount - imageQ.length;
+    const textQ = getQuestionsByType(difficulty, textNeeded, false);
 
     // 3. Combine and Shuffle
     const combined = [...imageQ, ...textQ];
@@ -693,7 +834,7 @@ function getQuestionsByType(difficulty, count, isImage) {
     const query = `
         SELECT id, class, difficulty, question, image, 
                option_a, option_b, option_c, option_d, option_e, 
-               correct_answer, shown_count
+               correct_answer, shown_count, comment
         FROM questions 
         WHERE class = ? AND difficulty = ? AND ${imageCondition}
         ORDER BY shown_count ASC, RANDOM()
@@ -717,7 +858,8 @@ function getQuestionsByType(difficulty, count, isImage) {
             E: row[9]
         },
         correct_answer: row[10],
-        shown_count: row[11]
+        shown_count: row[11],
+        comment: row[12]
     }));
 }
 
@@ -730,37 +872,75 @@ function shuffleArray(array) {
 }
 
 function ensureQuizLength() {
-    while (state.currentQuiz.length < TOTAL_QUESTIONS) {
-        const query = `
+    if (state.currentQuiz.length >= TOTAL_QUESTIONS) return;
+
+    const missingCount = TOTAL_QUESTIONS - state.currentQuiz.length;
+    const existingIds = state.currentQuiz.map(q => q.id);
+    const idCondition = existingIds.length > 0 ? `AND id NOT IN (${existingIds.join(',')})` : '';
+    
+    // Try to get from selectedDifficulties first
+    const placeholders = state.selectedDifficulties.map(() => '?').join(',');
+    const query = `
+        SELECT id, class, difficulty, question, image, 
+               option_a, option_b, option_c, option_d, option_e, 
+               correct_answer, shown_count, comment
+        FROM questions 
+        WHERE class = ? AND difficulty IN (${placeholders}) ${idCondition}
+        ORDER BY shown_count ASC, RANDOM()
+        LIMIT ?
+    `;
+
+    const params = [state.selectedClass, ...state.selectedDifficulties, missingCount];
+    const result = state.db.exec(query, params);
+
+    if (result.length && result[0].values.length > 0) {
+        const additional = result[0].values.map(row => ({
+            id: row[0],
+            class: row[1],
+            difficulty: row[2],
+            question: row[3],
+            image: row[4],
+            options: {
+                A: row[5], B: row[6], C: row[7], D: row[8], E: row[9]
+            },
+            correct_answer: row[10],
+            shown_count: row[11],
+            comment: row[12]
+        }));
+        state.currentQuiz.push(...additional);
+    }
+
+    // Final fallback: any question from this class
+    if (state.currentQuiz.length < TOTAL_QUESTIONS) {
+        const finalMissing = TOTAL_QUESTIONS - state.currentQuiz.length;
+        const finalIds = state.currentQuiz.map(q => q.id);
+        const finalIdCondition = finalIds.length > 0 ? `AND id NOT IN (${finalIds.join(',')})` : '';
+        
+        const finalResult = state.db.exec(`
             SELECT id, class, difficulty, question, image, 
                    option_a, option_b, option_c, option_d, option_e, 
-                   correct_answer, shown_count
+                   correct_answer, shown_count, comment
             FROM questions 
+            WHERE class = ? ${finalIdCondition}
             ORDER BY RANDOM()
             LIMIT ?
-        `;
-        const result = state.db.exec(query, [TOTAL_QUESTIONS - state.currentQuiz.length]);
+        `, [state.selectedClass, finalMissing]);
 
-        if (result.length && result[0].values.length > 0) {
-            const additional = result[0].values.map(row => ({
+        if (finalResult.length && finalResult[0].values.length > 0) {
+            const additional = finalResult[0].values.map(row => ({
                 id: row[0],
                 class: row[1],
                 difficulty: row[2],
                 question: row[3],
                 image: row[4],
                 options: {
-                    A: row[5],
-                    B: row[6],
-                    C: row[7],
-                    D: row[8],
-                    E: row[9]
+                    A: row[5], B: row[6], C: row[7], D: row[8], E: row[9]
                 },
                 correct_answer: row[10],
-                shown_count: row[11]
+                shown_count: row[11],
+                comment: row[12]
             }));
             state.currentQuiz.push(...additional);
-        } else {
-            break;
         }
     }
 
@@ -888,6 +1068,9 @@ function selectAnswer(letter) {
 }
 
 function getDifficultyForNumber(num) {
+    const question = state.currentQuiz[num - 1];
+    if (question && question.difficulty) return question.difficulty;
+
     if (num <= 15) return 'medium';
     return 'hard';
 }
@@ -985,9 +1168,9 @@ function evaluateAnswers() {
     let empty = 0;
 
     const difficultyResults = {
-        easy: { correct: 0, total: DIFFICULTY_DISTRIBUTION.easy.count },
-        medium: { correct: 0, total: DIFFICULTY_DISTRIBUTION.medium.count },
-        hard: { correct: 0, total: DIFFICULTY_DISTRIBUTION.hard.count }
+        easy: { correct: 0, total: 0 },
+        medium: { correct: 0, total: 0 },
+        hard: { correct: 0, total: 0 }
     };
 
     // Calculate score based on formula: 4H - R + F = 5H + U
@@ -997,7 +1180,11 @@ function evaluateAnswers() {
         const question = state.currentQuiz[i];
         const userAnswer = state.userAnswers[i];
         const correctAnswer = question.correct_answer;
-        const difficulty = getDifficultyForNumber(i + 1);
+        const difficulty = question.difficulty || getDifficultyForNumber(i + 1);
+
+        if (difficultyResults[difficulty]) {
+            difficultyResults[difficulty].total++;
+        }
 
         if (userAnswer === null) {
             empty++;
@@ -1050,9 +1237,11 @@ function displayResults(correct, wrong, empty, score, difficultyResults) {
 
     // Difficulty breakdown
     const easyTotal = difficultyResults.easy.total;
+    const mediumTotal = difficultyResults.medium.total;
+    const hardTotal = difficultyResults.hard.total;
     const easyPercent = easyTotal > 0 ? (difficultyResults.easy.correct / easyTotal) * 100 : 0;
-    const mediumPercent = (difficultyResults.medium.correct / difficultyResults.medium.total) * 100;
-    const hardPercent = (difficultyResults.hard.correct / difficultyResults.hard.total) * 100;
+    const mediumPercent = mediumTotal > 0 ? (difficultyResults.medium.correct / mediumTotal) * 100 : 0;
+    const hardPercent = hardTotal > 0 ? (difficultyResults.hard.correct / hardTotal) * 100 : 0;
 
     if (elements.easyBar) {
         elements.easyBar.style.width = `${easyPercent}%`;
@@ -1064,8 +1253,8 @@ function displayResults(correct, wrong, empty, score, difficultyResults) {
     elements.hardBar.style.width = `${hardPercent}%`;
 
     if (elements.easyScore) elements.easyScore.textContent = `${difficultyResults.easy.correct}/${easyTotal}`;
-    elements.mediumScore.textContent = `${difficultyResults.medium.correct}/${difficultyResults.medium.total}`;
-    elements.hardScore.textContent = `${difficultyResults.hard.correct}/${difficultyResults.hard.total}`;
+    elements.mediumScore.textContent = `${difficultyResults.medium.correct}/${mediumTotal}`;
+    elements.hardScore.textContent = `${difficultyResults.hard.correct}/${hardTotal}`;
 
     const analysis = generatePerformanceAnalysis(correct, difficultyResults);
     elements.performanceAnalysis.innerHTML = `
@@ -1093,8 +1282,12 @@ function generatePerformanceAnalysis(correct, difficultyResults) {
         overallAssessment = 'Ne add fel, gyakorlással fejlődhetsz! 💪';
     }
 
-    const mediumPercent = (difficultyResults.medium.correct / difficultyResults.medium.total) * 100;
-    const hardPercent = (difficultyResults.hard.correct / difficultyResults.hard.total) * 100;
+    const mediumPercent = difficultyResults.medium.total > 0
+        ? (difficultyResults.medium.correct / difficultyResults.medium.total) * 100
+        : 100;
+    const hardPercent = difficultyResults.hard.total > 0
+        ? (difficultyResults.hard.correct / difficultyResults.hard.total) * 100
+        : 100;
 
     let focusArea = '';
     if (mediumPercent < 60) {
@@ -1166,7 +1359,7 @@ function showQuestionDetail(index, questionOverride = null, userAnswerOverride =
         statusText = '✗ Hibás válasz';
     }
 
-    const difficulty = getDifficultyForNumber(index + 1);
+    const difficulty = question.difficulty || getDifficultyForNumber(index + 1);
 
     const modal = document.createElement('div');
     modal.className = 'question-detail-modal';
@@ -1195,6 +1388,10 @@ function showQuestionDetail(index, questionOverride = null, userAnswerOverride =
     }).join('')}
             </div>
             <div class="detail-result ${status}">${statusText}</div>
+            ${question.comment ? `<div class="question-reasoning">
+                <h4>💡 Megoldás és magyarázat</h4>
+                <p>${question.comment}</p>
+            </div>` : ''}
         </div>
     `;
 
@@ -1231,7 +1428,7 @@ function generateDatabaseJson() {
     return state.currentQuiz.map((question, index) => ({
         class: question.class,
         number: index + 1,
-        difficulty: getDifficultyForNumber(index + 1),
+        difficulty: question.difficulty || getDifficultyForNumber(index + 1),
         question: question.question,
         image: question.image || null,
         options: question.options,
@@ -1260,7 +1457,7 @@ function exportPdf() {
 
     const questionsHtml = state.currentQuiz.map((question, index) => {
         const questionNumber = index + 1;
-        const difficulty = getDifficultyForNumber(questionNumber);
+        const difficulty = question.difficulty || getDifficultyForNumber(questionNumber);
         const diffLabel = getDifficultyLabel(difficulty);
 
         const optionsHtml = ['A', 'B', 'C', 'D', 'E'].map(letter =>

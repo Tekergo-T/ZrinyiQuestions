@@ -64,7 +64,7 @@
             <div class="card glass-card">
                 <h2>Válaszd ki az osztályodat!</h2>
                 <p class="hint">Válassz 2-8. osztály közül</p>
-                <div class="class-buttons">
+                <div class="class-buttons" id="class-buttons-container">
                     <button class="class-btn" data-class="2">2. osztály</button>
                     <button class="class-btn" data-class="3">3. osztály</button>
                     <button class="class-btn" data-class="4">4. osztály</button>
@@ -72,6 +72,23 @@
                     <button class="class-btn" data-class="6">6. osztály</button>
                     <button class="class-btn" data-class="7">7. osztály</button>
                     <button class="class-btn" data-class="8">8. osztály</button>
+                </div>
+
+                <div class="difficulty-selection hidden" id="slider-container" style="margin-top: 2rem;">
+                    <p class="hint">Állítsd be, miből mennyit kérsz!</p>
+                    <div class="slider-group">
+                        <label class="diff-chip easy" style="display:inline-block; margin-bottom:10px;">Könnyű (<span id="count-easy">0</span> / <span id="max-easy">0</span>)</label>
+                        <input type="range" id="slider-easy" class="diff-slider easy-slider" min="0" max="0" value="0" oninput="document.getElementById('count-easy').textContent = this.value">
+                    </div>
+                    <div class="slider-group">
+                        <label class="diff-chip medium" style="display:inline-block; margin-bottom:10px;">Közepes (<span id="count-medium">0</span> / <span id="max-medium">0</span>)</label>
+                        <input type="range" id="slider-medium" class="diff-slider medium-slider" min="0" max="0" value="0" oninput="document.getElementById('count-medium').textContent = this.value">
+                    </div>
+                    <div class="slider-group">
+                        <label class="diff-chip hard" style="display:inline-block; margin-bottom:10px;">Nehéz (<span id="count-hard">0</span> / <span id="max-hard">0</span>)</label>
+                        <input type="range" id="slider-hard" class="diff-slider hard-slider" min="0" max="0" value="0" oninput="document.getElementById('count-hard').textContent = this.value">
+                    </div>
+                    <button class="btn-primary" style="margin-top:20px; width:100%;" onclick="startConfiguredQuiz()">Kvíz Indítása</button>
                 </div>
 
                 <!-- Quiz History Section -->
