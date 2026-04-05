@@ -2721,7 +2721,7 @@ QUESTIONS = [
         "class": "2",
         "comment": "Legrosszabb eset: 4 db egy színből + 2+1+1 másokból = 8 labda, de abból csak 1 pár. A 9. labda "
         "biztosítja a 2. párt is.",
-        "correct": "E",
+        "correct": "D",
         "difficulty": "hard",
         "options": ["5", "6", "7", "8", "9"],
         "question": "Egy zsákban 4 piros, 4 kék, 4 zöld és 4 sárga labda van. Legalább hány labdát kell kivenned "
