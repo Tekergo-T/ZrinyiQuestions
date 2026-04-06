@@ -2205,7 +2205,7 @@ QUESTIONS = [
         "class": "2",
         "comment": "A kényszerfeltételek alapján az egyetlen lehetséges párosítás az üléseken: (A,E), (B,F), (C,D). "
         "Tehát Anna Eszter mellett ült.",
-        "correct": "D",
+        "correct": "B",
         "difficulty": "hard",
         "options": ["Bea", "Csilla", "Dóri", "Eszter", "nem meghatározható"],
         "question": "Az autóbuszban 3 sorban egymás mögött, soronként 2 üléssel, összesen 6 szabad hely van. Anna (A), "
