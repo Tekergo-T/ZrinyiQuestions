@@ -2730,15 +2730,6 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "3 jobbra + 3 lefelé lépés kell. Ezek sorrendje: 6!/(3!×3!) = 20.",
-        "correct": "D",
-        "difficulty": "hard",
-        "options": ["6", "10", "15", "20", "24"],
-        "question": "Egy 3×3-as rácson az S pontból a C pontba kell eljutnod, de csak jobbra (→) vagy lefelé (↓) "
-        "léphetsz. Hányféleképpen tudsz eljutni S-ből C-be?",
-    },
-    {
-        "class": "2",
         "comment": "Jegy-halmazok: {1,2,3}→6db, {0,1,5}→4db (0 nem lehet az első), {0,2,4}→4db. Összesen 6+4+4 = 14.",
         "correct": "D",
         "difficulty": "hard",
@@ -2748,14 +2739,11 @@ QUESTIONS = [
     },
     {
         "class": "2",
-        "comment": "Az 1. sorból 1-et fehérre cserélünk úgy, hogy az a 4. sor oszlopába essen → mindkét sor rendben "
-        "lesz. 1 csere elég.",
-        "correct": "A",
+        "comment": "Az 1. sorból 1 fekete golyót fehérre cserélünk, és a 4. sorban 1 fehér golyót feketére. Ha ezt ugyanabban az oszlopban tesszük, az oszlopok is megfelelőek maradnak. Így minimum 2 csere szükséges.",
+        "correct": "B",
         "difficulty": "hard",
         "options": ["1", "2", "3", "4", "5"],
-        "question": "Egy 4×4-es rácsban fekete és fehér golyók vannak. Legkevesebb hány golyó színét kell "
-        "megváltoztatni, hogy MINDEN sorban és MINDEN oszlopban pontosan 2 fekete golyó legyen, ha "
-        "jelenleg az 1. sorban 3, a 2. sorban 2, a 3. sorban 2, a 4. sorban 1 fekete golyó van?",
+        "question": "Egy 4×4-es rácsban fekete és fehér golyók vannak. Legkevesebb hány golyó színét kell megváltoztatni, hogy MINDEN sorban és MINDEN oszlopban pontosan 2 fekete golyó legyen, ha jelenleg az 1. sorban 3, a 2. sorban 2, a 3. sorban 2, a 4. sorban 1 fekete golyó van?",
     },
     {
         "class": "2",
